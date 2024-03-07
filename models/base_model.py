@@ -20,3 +20,26 @@ class BaseModel:
 		value with the current datetime
 	to_dict(:pub): returns a dictionary of keys/vaues of instance
     """
+    from uuid import uuid4 as idgen
+
+
+    def __get_time__(offset=0):
+        """Gets an aware time from a naive one
+
+        Attributes:
+		offset(:int): UTC offset
+        Returns:
+        	Aware time from datetime.now()
+        """
+        from datetime import datetime, timedelta, timezone
+
+        time_now = datetime.now()
+        delta = timedelta(hours=offset)
+        time_now = time_now.astimezone(timezone(delta))
+        return time_now
+
+    id = str(idgen())
+    created_at = __get_time__()
+    updated_at = created_at
+
+
