@@ -43,5 +43,11 @@ class BaseModel:
         self.updated_at = self.created_at
 
     def __str__(self):
-        """Creates a 
+        """Creates a strig of the class object
+
+        Attributes: None
+        Returns: string representing the class in this format:
+        	[<class name>] (<self.id>) <self.__dict__>
+        """
+
         return f"[{BaseModel.__name__}] ({self.id}) {self.__dict__}"
