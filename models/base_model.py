@@ -16,8 +16,8 @@ class BaseModel:
 
     Methods:
 	__str__(:prv): prints: str rep of class instance
-	save(:pub): updates the public instance attribute's 'updated_at' \
-		value with the current datetime
+	save(:pub): updates the value of the public instance attribute \
+		'updated_at with the current datetime
 	to_dict(:pub): returns a dictionary of keys/vaues of instance
     """
 
