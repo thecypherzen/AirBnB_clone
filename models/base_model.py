@@ -23,6 +23,16 @@ class BaseModel:
 
 
     def __init__(self):
+        """Initializes the BaseModel instance
+
+        Attributes:
+        	id: the uuid of instance
+	        created_at: datetime of instance creation
+        	updated_at: datetime of instance modification time
+
+        Returns:
+        	None
+        """
         from uuid import uuid4 as idgen
         import datetime as dt
 
