@@ -25,10 +25,12 @@ class BaseModel:
     def __init__(self):
         """Initializes the BaseModel instance
 
+        It sets the values of all attributes.
+
         Attributes:
-        	id: the uuid of instance
-	        created_at: datetime of instance creation
-        	updated_at: datetime of instance modification time
+        	id(:pub): the uuid of instance
+	        created_at(:pub): datetime of instance creation
+        	updated_at(:pub): datetime of instance modification time
 
         Returns:
         	None
@@ -41,4 +43,5 @@ class BaseModel:
         self.updated_at = self.created_at
 
     def __str__(self):
+        """Creates a 
         return f"[{BaseModel.__name__}] ({self.id}) {self.__dict__}"
