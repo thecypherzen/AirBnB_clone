@@ -12,8 +12,8 @@ objectives are to understand the following:
 ## Folder Details ###
 - **Date Created:** Sun Mar 3 2024.
 - **Authors:** 
-	- [William Inyam](https.//github.com/thecypherzen).
-	- [Valentine](https)
+	- [William Inyam](https.//github.com/thecypherzen)
+	- [Valentine](https.//github.com/ValentineNyibiam)
 - **Project Timeline:**
   - **Released:** Wed Feb. 28, 2024 - 6am.
   - **1st Deadline:** Fri Mar 1, 2024 - 6am.
