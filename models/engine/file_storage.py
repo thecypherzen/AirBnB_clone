@@ -41,7 +41,7 @@ class FileStorage:
 		None
         """
         key = obj['__class__']
-        __objects[key] = obj
+        self.__objects[key] = obj
 
     def reload(self):
         """JSON deserializer of storage objects
