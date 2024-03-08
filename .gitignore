@@ -2,3 +2,5 @@
 *#
 *.pyc
 basemodel_tests.txt
+*.test
+__pycache__
