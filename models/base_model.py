@@ -34,7 +34,7 @@ class BaseModel:
         	None
         """
         self.id = str(idgen())
-        self.created_at = dt.now()
+        self.created_at = str(dt.now())
         self.updated_at = self.created_at
 
     def __str__(self):
@@ -65,11 +65,3 @@ class BaseModel:
 			(ex: 2017-06-14T22:31:03.285259)
         """
         return self.__dict__
-
-
-my_model = BaseModel()
-my_model.name = "My First Model"
-my_model.my_number = 89
-my_model_json = my_model.to_dict()
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
