@@ -64,4 +64,6 @@ class BaseModel:
 			to ISO format: %Y-%m-%dT%H:%M:%S.%f \
 			(ex: 2017-06-14T22:31:03.285259)
         """
-        return self.__dict__
+        temp = self.__dict__
+        temp['__class__'] = self.__class__.__name__
+        return temp
