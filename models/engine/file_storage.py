@@ -53,3 +53,13 @@ class FileStorage:
         if os.path.exists(self.__file_path):
             with open(__file_path, 'r') as file:
                 __objects = json.load(file)
+
+    def save(self):
+        """Saves all objects to file
+
+        Serializes '__objects' and saves in '__file_path'
+        Returns:
+        	None
+        """
+        with open(self.__file_path, 'w') as file:
+            json.dump(self.__objects)
