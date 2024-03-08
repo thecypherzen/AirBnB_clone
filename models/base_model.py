@@ -6,7 +6,9 @@ Classes:
 	BaseModel
 """
 from uuid import uuid4 as idgen
-from datetime import datetime as dt
+from datetime import datetime as dt,\
+    timedelta as td,\
+    date
 
 class BaseModel:
     """The base class from which all hbnb models inherit
@@ -20,10 +22,16 @@ class BaseModel:
     """
 
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initializes the BaseModel instance
 
         It sets the values of all attributes.
+        	- If kwargs is passed, new instance is created from its values
+        	- Else, instance is created from scratch
+
+        Args:
+        	args(:obj:tup): tuple of all unamed args
+		kwargs(:obj:dict): dict of all named args
 
         Attributes:
         	id(:str:pub): uuid of class instance when it's created
@@ -33,9 +41,19 @@ class BaseModel:
         Returns:
         	None
         """
-        self.id = str(idgen())
-        self.created_at = str(dt.now())
-        self.updated_at = self.created_at
+        if kwargs:
+            _id = kwargs['id']
+            _created = dt.fromisoformat(kwargs['created_at'])
+            _updated = dt.fromisoformat(kwargs['updated_at'])
+        else:
+            _id = str(idgen())
+            _created  = dt.now()
+            _updated = _created
+
+        self.id = _id
+        self.created_at = _created
+        self.updated_at = _updated
+
 
     def __str__(self):
         """Creates a strig of the class object
