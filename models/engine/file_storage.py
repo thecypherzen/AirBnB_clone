@@ -24,7 +24,8 @@ class FileStorage:
     __file_path = ".hbnb_storage.json"
     __objects = {}
 
-    @classmethod
     def all(cls):
         """Class method that returns all objects in the FileStorage class"""
         return cls.__objects
+
+    def
