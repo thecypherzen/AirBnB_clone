@@ -45,7 +45,7 @@ class BaseModel:
         	[<class name>] (<self.id>) <self.__dict__>
         """
 
-        return f"[{BaseModel.__name__}] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Updates class's 'updated_at' to current datetime"""
