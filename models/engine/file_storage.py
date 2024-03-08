@@ -1,6 +1,9 @@
 """A module where file storage class is defined
 """
 
+import os
+import json
+
 class FileStorage:
     """The hbnb filestorage handler
 
@@ -38,3 +41,14 @@ class FileStorage:
         """
         key = obj['__class__']
         __objects[key] = obj
+
+    def reload(self):
+        """JSON deserializer of storage objects
+
+        Converts(deserializes) a JSON file in '--file_path' into objects
+		and stores them in the '__objects' dict.
+	    * if the path to JSON file doesn't exist, it does nothing.
+        """
+        if os.path.exists(__file_path):
+            with open(__file_path, 'r') as file:
+                __objects = json.load(file)
