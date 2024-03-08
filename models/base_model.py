@@ -11,12 +11,8 @@ from datetime import datetime as dt
 class BaseModel:
     """The base class from which all hbnb models inherit
 
-    Variables:
-    	id(:str:pub): uuid of class instance when it's created
-    	created_at(:datetime:pub): datetime when instance is created
-    	updated_at(:datetime:pub): datetime when instance is modified
-
     Methods:
+    	__init__(:prv): instantiates the class
 	__str__(:prv): prints: str rep of class instance
 	save(:pub): updates the value of the public instance attribute \
 		'updated_at with the current datetime
@@ -30,9 +26,9 @@ class BaseModel:
         It sets the values of all attributes.
 
         Attributes:
-        	id(:pub): the uuid of instance
-	        created_at(:pub): datetime of instance creation
-        	updated_at(:pub): datetime of instance modification time
+        	id(:str:pub): uuid of class instance when it's created
+        	created_at(:datetime:pub): datetime when instance is created
+	    	updated_at(:datetime:pub): datetime when instance is modified
 
         Returns:
         	None
@@ -52,13 +48,5 @@ class BaseModel:
         return f"[{BaseModel.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
+        """Updates class's 'updated_at' to current datetime"""
         self.updated_at = dt.now()
-
-
-
-my_model = BaseModel()
-my_model.name = "My First Model"
-my_model.my_number = 89
-print(my_model, end='\n\n')
-my_model.save()
-print(my_model)
