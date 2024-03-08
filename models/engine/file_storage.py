@@ -50,6 +50,6 @@ class FileStorage:
 		and stores them in the '__objects' dict.
 	    * if the path to JSON file doesn't exist, it does nothing.
         """
-        if os.path.exists(__file_path):
+        if os.path.exists(self.__file_path):
             with open(__file_path, 'r') as file:
                 __objects = json.load(file)
