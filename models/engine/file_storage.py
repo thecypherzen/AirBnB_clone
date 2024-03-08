@@ -3,6 +3,7 @@
 
 import os
 import json
+import sys
 
 class FileStorage:
     """The hbnb filestorage handler
@@ -29,7 +30,7 @@ class FileStorage:
 
     def all(self):
         """Class method that returns all objects in the FileStorage class"""
-        return cls.__objects
+        return self.__objects
 
     def new(self, obj):
         """Changes contnet of __objects dic
