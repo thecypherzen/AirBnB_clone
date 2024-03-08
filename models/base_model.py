@@ -5,6 +5,8 @@ Is the base class from which all other hbnb models inherit.
 Classes:
 	BaseModel
 """
+from uuid import uuid4 as idgen
+from datetime import datetime as dt
 
 class BaseModel:
     """The base class from which all hbnb models inherit
@@ -35,11 +37,8 @@ class BaseModel:
         Returns:
         	None
         """
-        from uuid import uuid4 as idgen
-        import datetime as dt
-
         self.id = str(idgen())
-        self.created_at = dt.datetime.now()
+        self.created_at = dt.now()
         self.updated_at = self.created_at
 
     def __str__(self):
@@ -51,3 +50,15 @@ class BaseModel:
         """
 
         return f"[{BaseModel.__name__}] ({self.id}) {self.__dict__}"
+
+    def save(self):
+        self.updated_at = dt.now()
+
+
+
+my_model = BaseModel()
+my_model.name = "My First Model"
+my_model.my_number = 89
+print(my_model, end='\n\n')
+my_model.save()
+print(my_model)
