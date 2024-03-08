@@ -58,12 +58,17 @@ class BaseModel:
 		creating a dictionary representation of 'BaseModel'
 
         Notes:
-        	* A key '__class__' must be added to the dictionary with the \
+        	* A key '__class__' is added to the dictionary with the \
 		class name of the object
         	* Values of 'created_at' and 'updated_at' are converted \
 			to ISO format: %Y-%m-%dT%H:%M:%S.%f \
 			(ex: 2017-06-14T22:31:03.285259)
         """
+        # update timestamp values
+        self.created_at = self.created_at.isoformat()
+        self.updated_at = self.updated_at.isoformat()
+
+        # get dictionary
         temp = self.__dict__
         temp['__class__'] = self.__class__.__name__
         return temp
