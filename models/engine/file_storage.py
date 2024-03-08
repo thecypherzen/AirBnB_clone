@@ -24,8 +24,17 @@ class FileStorage:
     __file_path = ".hbnb_storage.json"
     __objects = {}
 
-    def all(cls):
+    def all(self):
         """Class method that returns all objects in the FileStorage class"""
         return cls.__objects
 
-    def
+    def new(self, obj):
+        """Changes contnet of __objects dic
+
+        In the __objects dictionary, it changes or sets the value of the key
+		'<object_name.id>.id' to 'obj' accordingly.
+        Return:
+		None
+        """
+        key = obj['__class__']
+        __objects[key] = obj
