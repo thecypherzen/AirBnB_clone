@@ -50,3 +50,26 @@ class BaseModel:
     def save(self):
         """Updates class's 'updated_at' to current datetime"""
         self.updated_at = dt.now()
+
+    def to_dict(self):
+        """Returns a dictionary of class's __dict__
+
+        It's the first piece of the serialization/deserialization process:\
+		creating a dictionary representation of 'BaseModel'
+
+        Notes:
+        	* A key '__class__' must be added to the dictionary with the \
+		class name of the object
+        	* Values of 'created_at' and 'updated_at' are converted \
+			to ISO format: %Y-%m-%dT%H:%M:%S.%f \
+			(ex: 2017-06-14T22:31:03.285259)
+        """
+        return self.__dict__
+
+
+my_model = BaseModel()
+my_model.name = "My First Model"
+my_model.my_number = 89
+my_model_json = my_model.to_dict()
+for key in my_model_json.keys():
+    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
