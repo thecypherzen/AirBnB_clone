@@ -62,4 +62,4 @@ class FileStorage:
         	None
         """
         with open(self.__file_path, 'w') as file:
-            json.dump(self.__objects)
+            json.dump(self.__objects, file)
