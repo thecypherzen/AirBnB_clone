@@ -40,7 +40,7 @@ class FileStorage:
         Return:
 		None
         """
-        key = obj['__class__']
+        key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
 
     def reload(self):
