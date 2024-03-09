@@ -4,3 +4,4 @@
 basemodel_tests.txt
 *.test
 __pycache__
+*.hbnb_storage.json
