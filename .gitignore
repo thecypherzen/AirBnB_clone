@@ -1,7 +1,7 @@
 *~
 *#
 *.pyc
-basemodel_tests.txt
+*_tests.txt
 *.test
 __pycache__
 *.hbnb_storage.json
