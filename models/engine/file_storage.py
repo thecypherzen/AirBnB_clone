@@ -43,10 +43,11 @@ class FileStorage:
         Return:
                 None
         """
+        from copy import deepcopy
         key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
-        print("objs in mem:\n\t >> ", self.__objects)
-        print("\t >> obj >> ", self.__objects[key], end="\n\n")
+        # print("objs in mem:\n\t >> ", self.__objects)
+        # print("\t >> obj >> ", self.__objects[key], end="\n\n")
 
     def reload(self):
         """JSON deserializer of storage objects
@@ -56,11 +57,11 @@ class FileStorage:
             * if the path to JSON file doesn't exist, it does nothing.
         """
         from models.base_model import BaseModel
+
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
                 self.__objects = json.load(file)
-
-            print("\nreloading:\n\t>>", self.__objects)
+            # print("\nreloading:\n\t>>", self.__objects)
             for key, model in self.__objects.items():
                 self.__objects[key] = BaseModel(**model)
 
@@ -71,8 +72,8 @@ class FileStorage:
         Returns:
                 None
         """
-        for key, model in self.__objects.items():
-            self.__objects[key] = model.to_dict()
+        for key, obj in self.__objects.items():
+            self.__objects[key] = obj.to_dict()
 
         with open(self.__file_path, 'w') as file:
             json.dump(self.__objects, file, indent=4)
