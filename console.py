@@ -3,6 +3,7 @@
 This is a program that contains the entry point of the command interpreter
 """
 import cmd
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -14,12 +15,22 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, line):
+        print()
         """ EOF command to exit the program """
         return True
 
     def do_create(self, line):
-        """ Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id. Ex: $ create BaseModel """
-        pass
+        """ Creates a new instance of BaseModel,
+        saves it (to the JSON file) and prints the id.
+        Ex: $ create BaseModel """
+        if line == "":
+            print("** class name missing **")
+        elif line != "BaseModel":
+            print("** class doesn't exist **")
+        else:
+            basemodel = BaseModel()
+            basemodel.save()
+            print(basemodel.id)
 
     def do_show(self, line):
         """  the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234 """
