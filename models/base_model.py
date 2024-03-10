@@ -17,8 +17,8 @@ class BaseModel:
         __init__(:prv): instantiates the class
         __str__(:prv): prints: str rep of class instance
         save(:pub): updates the value of the public instance attribute \
-                'updated_at with the current datetime
-        to_dict(:pub): returns a dictionary of keys/vaues of instance
+                'updated_at' with the current datetime
+        to_dict(:pub): returns a dictionary of keys/values of instance
     """
     def __init__(self, *args, **kwargs):
         """Initializes the BaseModel instance
@@ -50,7 +50,7 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        """Creates a strig of the class object
+        """Creates a string of the class object
 
         Attributes: None
         Returns: string representing the class in this format:
