@@ -33,8 +33,8 @@ class HBNBCommand(cmd.Cmd):
             print(basemodel.id)
 
     def do_show(self, line):
-        """  the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234 """
-        pass
+        """  Prints the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234 """
+
 
     def do_destroy(self, line):
         """ Deletes an instance based on the class name and id (save the change into the JSON file). Ex: $ destroy BaseModel 1234-1234-1234 """
