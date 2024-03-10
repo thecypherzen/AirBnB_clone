@@ -40,9 +40,28 @@ class BaseModel:
                 None
         """
         if kwargs:
-            self.id = kwargs['id']
-            self.created_at = dt.fromisoformat(kwargs['created_at'])
-            self.updated_at = dt.fromisoformat(kwargs['updated_at'])
+            keys = kwargs.keys()
+            if "id" in keys:
+                self.id = kwargs['id']
+            else:
+                self.id = str(idgen())
+
+            if "created_at" in keys:
+                self.created_at = dt.fromisoformat(kwargs['created_at'])
+            else:
+                self.created_at = dt.now()
+
+            if "updated_at" in keys:
+                self.updated_at = dt.fromisoformat(kwargs['updated_at'])
+            else:
+                self.updated_at = self.created_at
+
+            to_skip = ["id", "created_at", "updated_at", "__class__"]
+            for key in kwargs.keys():
+                if key not in to_skip:
+                    setattr(self, key, kwargs[key])
+            if "id" not in key:
+                storage.new(self)
         else:
             self.id = str(idgen())
             self.created_at = dt.now()
@@ -50,7 +69,7 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        """Creates a strig of the class object
+        """Creates a string of the class object
 
         Attributes: None
         Returns: string representing the class in this format:
@@ -60,7 +79,7 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """Updates class's 'updated_at' to current datetime"""
+        """Updates class' 'updated_at' to current datetime"""
 
         self.updated_at = dt.now()
         storage.save()
@@ -78,11 +97,13 @@ class BaseModel:
                         to ISO format: %Y-%m-%dT%H:%M:%S.%f \
                         (ex: 2017-06-14T22:31:03.285259)
         """
+        from copy import deepcopy
         # update timestamp values
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
+        obj_copy = deepcopy(self)
+        obj_copy.created_at = obj_copy.created_at.isoformat()
+        obj_copy.updated_at = obj_copy.updated_at.isoformat()
 
         # get dictionary
-        temp = self.__dict__
+        temp = obj_copy.__dict__
         temp['__class__'] = self.__class__.__name__
         return temp
