@@ -10,17 +10,17 @@ class Place(BaseModel):
     Inherits from the BaseModel parent class
 
     Attributes:
-    	city_id(:str): The City.id - inits to empty str
-    	user_id(:str): The User.id - inits to empty str
-    	name(:str): Place name - inits to empty string
-    	description(:str): Place's description - inits to empty str
-    	number_rooms(:int): Inits to 0
-    	number_bathrooms(:int): Inits to 0
-    	max_guest(:int): Maximum guets possible - inits to 0
-    	price_by_night(:int): Inits to 0
-    	latitude(:float): Inits to 0.0
-    	longitude(:float): Inits to 0.0
-    	amenity_ids(:list:str): List of strings of `Amenity.id`s
+        city_id(:str): The City.id - inits to empty str
+        user_id(:str): The User.id - inits to empty str
+        name(:str): Place name - inits to empty string
+        description(:str): Place's description - inits to empty str
+        number_rooms(:int): Inits to 0
+        number_bathrooms(:int): Inits to 0
+        max_guest(:int): Maximum guets possible - inits to 0
+        price_by_night(:int): Inits to 0
+        latitude(:float): Inits to 0.0
+        longitude(:float): Inits to 0.0
+        amenity_ids(:list:str): List of strings of `Amenity.id`s
 
     """
     def __init__(self, *args, **kwargs):

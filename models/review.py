@@ -10,7 +10,7 @@ class Review(BaseModel):
     Attributes:
         place_id(:str): the place's id. Inits empty
         user_id(:str): user's name. Inits empty
-    	text(:str): review text. Inits to empty
+        text(:str): review text. Inits to empty
     """
     def __init__(self, *args, **kwargs):
         """Initializes the Review class.
