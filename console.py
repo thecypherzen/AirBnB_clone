@@ -22,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ This function is called when the user\
             passes and emptyline to the console """
-        return True
+        pass
 
     def do_create(self, line):
         """ Creates a new instance of BaseModel,\
