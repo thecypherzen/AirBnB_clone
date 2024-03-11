@@ -4,7 +4,7 @@ The **AirBnB clone - The console** project pushes further the introduction to th
 back-end development and OOP.
 objectives are to understand the following:
 - Unittest
-- What is 0.0.0.0
+- Python packages
 - What is /etc/hosts
 -  How to display your machine’s active network interfaces
 
