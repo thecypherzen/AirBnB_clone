@@ -14,7 +14,7 @@ objectives are to understand the following:
 - **Date Created:** Sun Mar 3 2024.
 - **Authors:** 
 	- [William Inyam](https.//github.com/thecypherzen)
-	- [Valentine](https.//github.com/ValentineNyibiam)
+	- [Valentine Nyibiam](https.//github.com/ValentineNyibiam)
 - **Project Timeline:**
   - **Released:** Wed Feb. 28, 2024 - 6am.
   - **1st Deadline:** Fri Mar 1, 2024 - 6am.
