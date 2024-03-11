@@ -36,7 +36,7 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """Changes contnet of __objects dic
+        """Changes content of __objects dict
 
         In the __objects dictionary, it changes or sets the value of the key
                 '<object_name.id>.id' to 'obj' accordingly.
