@@ -6,7 +6,7 @@ objectives are to understand the following:
 - Unittest
 - Python packages
 - Serialization/Deserialization
--  How to display your machine’s active network interfaces
+- *args, **kwargs
 
 
 ## Folder Details ###
