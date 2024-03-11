@@ -1,6 +1,6 @@
 """A module where file storage class is defined
 """
-
+from copy import deepcopy
 import os
 import json
 import sys
@@ -43,11 +43,9 @@ class FileStorage:
         Return:
                 None
         """
-        from copy import deepcopy
+
         key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
-        # print("objs in mem:\n\t >> ", self.__objects)
-        # print("\t >> obj >> ", self.__objects[key], end="\n\n")
 
     def reload(self):
         """JSON deserializer of storage objects
@@ -57,13 +55,20 @@ class FileStorage:
             * if the path to JSON file doesn't exist, it does nothing.
         """
         from models.base_model import BaseModel
+        from models.amenity import Amenity
+        from models.city import City
+        from models.place import Place
+        from models.review import Review
+        from models.state import State
+        from models.user import User
 
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
                 self.__objects = json.load(file)
-            # print("\nreloading:\n\t>>", self.__objects)
+
             for key, model in self.__objects.items():
-                self.__objects[key] = BaseModel(**model)
+                ClassObj = locals()[model["__class__"]]
+                self.__objects[key] = ClassObj(**model)
 
     def save(self):
         """Saves all objects to file
@@ -72,8 +77,9 @@ class FileStorage:
         Returns:
                 None
         """
-        for key, obj in self.__objects.items():
-            self.__objects[key] = obj.to_dict()
+        __objects_copy = deepcopy(self.__objects)
+        for key, obj in __objects_copy.items():
+            __objects_copy[key] = obj.to_dict()
 
         with open(self.__file_path, 'w') as file:
-            json.dump(self.__objects, file, indent=4)
+            json.dump(__objects_copy, file, indent=4)

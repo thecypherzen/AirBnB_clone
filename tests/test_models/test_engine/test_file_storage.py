@@ -104,6 +104,7 @@ class TestFileStorage(TestCase):
         self.assertTrue(model_key in store_objs)
 
     def test_04_save_mthd_check(self):
+#        print(self.store.all())
         self.store.save()
         save_store = self.FS()
         save_store_items = save_store.all()
