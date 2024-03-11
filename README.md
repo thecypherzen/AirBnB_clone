@@ -7,6 +7,7 @@ objectives are to understand the following:
 - Python packages
 - Serialization/Deserialization
 - *args, **kwargs
+- datetime
 
 
 ## Folder Details ###
