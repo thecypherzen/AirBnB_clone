@@ -11,14 +11,14 @@ objectives are to understand the following:
 
 
 ## Folder Details ###
-- **Date Created:** Sun Mar 3 2024.
+- **Date Created:** Mar 4 2024.
 - **Authors:** 
 	- [William Inyam](https.//github.com/thecypherzen)
 	- [Valentine Nyibiam](https.//github.com/ValentineNyibiam)
 - **Project Timeline:**
-  - **Released:** Wed Feb. 28, 2024 - 6am.
-  - **1st Deadline:** Fri Mar 1, 2024 - 6am.
-  - **Duration:** 2 days.
+  - **Released:** Mar. 4, 2024 - 6am.
+  - **1st Deadline:** Mar 11, 2024 - 6am.
+  - **Duration:** 7 days.
   - **Month** 5, **Week** 1, **Day** 3.
 
 # Technologies #
