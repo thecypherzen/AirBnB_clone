@@ -16,8 +16,8 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, line):
-        print()
         """ EOF command to exit the program """
+        print()
         return True
 
     def do_create(self, line):
