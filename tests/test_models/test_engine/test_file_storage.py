@@ -7,28 +7,6 @@ from uuid import uuid4 as idgen
 from datetime import datetime as dt
 
 
-class CheckerClass():
-    def __init__(self, *args, **kwargs):
-        if kwargs:
-            for key in kwargs.keys():
-                setattr(self, key, kwargs[key])
-        self.id = str(idgen())
-        self.created_at = dt.now()
-        self.updated_at = self.created_at
-
-    def to_dict(self):
-        from copy import deepcopy
-        # update timestamp values
-        obj_copy = deepcopy(self)
-        obj_copy.created_at = obj_copy.created_at.isoformat()
-        obj_copy.updated_at = obj_copy.updated_at.isoformat()
-
-        # get dictionary
-        temp = obj_copy.__dict__
-        temp['__class__'] = self.__class__.__name__
-        return temp
-
-
 class TestFileStorage(TestCase):
     @classmethod
     def setUpClass(cls):
@@ -44,13 +22,22 @@ class TestFileStorage(TestCase):
         if cls.hbnb_dir not in sys.path:
             sys.path.append(cls.hbnb_dir)
 
-        from models import base_model
+        from models import base_model, amenity, city, place,\
+            review, state, user
         from models.engine import file_storage
 
         cls.BM = base_model.BaseModel
         cls.FS = file_storage.FileStorage
+        cls.AM = amenity.Amenity
+        cls.City = city.City
+        cls.Place = place.Place
+        cls.Rev = review.Review
+        cls.Sta = state.State
+        cls.Usr = user.User
         cls.store = cls.FS()
-        cls.model = CheckerClass(gender="Male", cohort="19")
+        cls.review = cls.Rev(user_id="xyz-23",
+                             text="very cozy and comfy",
+                             place_id="KN/LV/0923-3G")
 
     def test_01_docs_check(self):
         models_pkg = __import__("models")
@@ -92,31 +79,23 @@ class TestFileStorage(TestCase):
                 self.assertEqual(err, errmsg)
 
     def test_03_all_mthd_check(self):
-        store = self.FS()
-        store_dict = store.all()
+        store_dict = self.store.all()
         with self.subTest(msg="1:all_dict check Fail"):
             self.assertIsInstance(store_dict, dict)
 
-    def test_03_new_mthd_check(self):
-        model_key = f"{self.model.__class__.__name__}.{self.model.id}"
-        self.store.new(self.model)
+    def test_04_new_mthd_check(self):
+        user = self.Usr()
+        user_key = f"{user.__class__.__name__}.{user.id}"
+        user.save()
+        self.store.reload()
         store_objs = self.store.all()
-        self.assertTrue(model_key in store_objs)
-
-    def test_04_save_mthd_check(self):
-#        print(self.store.all())
-        self.store.save()
-        save_store = self.FS()
-        save_store_items = save_store.all()
-        model_key = f"{self.model.__class__.__name__}.{self.model.id}"
-        with self.subTest(msg="1:Reload Fail"):
-            self.assertIn(model_key, save_store_items)
+        self.assertTrue(user_key in store_objs.keys())
 
     def test_05_reload_check(self):
-        new_store = self.FS()
-        new_store.reload()
-        new_store_items = new_store.all()
-        model_key = f"{self.model.__class__.__name__}.{self.model.id}"
+        self.review.save()
+        self.store.reload()
+        new_store_items = self.store.all()
+        model_key = f"{self.review.__class__.__name__}.{self.review.id}"
         self.assertIn(model_key, new_store_items)
 
 
