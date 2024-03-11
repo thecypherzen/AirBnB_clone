@@ -5,7 +5,7 @@ back-end development and OOP.
 objectives are to understand the following:
 - Unittest
 - Python packages
-- What is /etc/hosts
+- Serialization/Deserialization
 -  How to display your machine’s active network interfaces
 
 
