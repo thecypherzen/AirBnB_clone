@@ -4,7 +4,7 @@ This is a program that contains the entry point of the command interpreter
 """
 import cmd
 from models.base_model import BaseModel
-
+from models.engine.file_storage import
 
 class HBNBCommand(cmd.Cmd):
     """ This is a class that defines the command interpreter """
@@ -49,4 +49,10 @@ class HBNBCommand(cmd.Cmd):
         pass
 
 if __name__ == '__main__':
+    import sys
+
+    if len(sys.argv) > 1:
+        #non interactive mode
+        HBNBCommand().onecmd(''.join(sys.argv[1:]))
+    else:
         HBNBCommand().cmdloop()
