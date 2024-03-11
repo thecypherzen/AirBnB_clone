@@ -19,7 +19,7 @@ objectives are to understand the following:
   - **Released:** Mar. 4, 2024 - 6am.
   - **1st Deadline:** Mar 11, 2024 - 6am.
   - **Duration:** 7 days.
-  - **Month** 5, **Week** 1, **Day** 3.
+  - **Month** 5, **Week** 3.
 
 # Technologies #
 - All your files will be interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
