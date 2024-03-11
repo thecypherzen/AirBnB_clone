@@ -6,6 +6,7 @@ import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
+
 class HBNBCommand(cmd.Cmd):
     """ This is a class that defines the command interpreter """
     prompt = "(hbnb) "
