@@ -1,7 +1,7 @@
 # Overview #
 
-The **Networking basics_2** project pushes further the introduction to the \
-basics of networking. It is a sequel to the Networking basics_0,  the project \
+The **AirBnB clone - The console** project pushes further the introduction to the \
+back-end development and OOP.
 objectives are to understand the following:
 - What is localhost/127.0.0.1
 - What is 0.0.0.0
