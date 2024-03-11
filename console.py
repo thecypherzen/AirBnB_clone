@@ -17,8 +17,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         """ EOF command to exit the program """
-        print()
-        return
+        return True
 
     def emptyline(self):
         """ This function is called when the user passes and emptyline to the console """
