@@ -43,16 +43,20 @@ class HBNBCommand(cmd.Cmd):
             based on the class name and id.
             Ex: $ show BaseModel 1234-1234-1234 """
         input = line.split()
-        if input == "":
-            print("** class name missing **")
-        elif len(input) != 2:
-            if model exist:
-                print("** instance id missing **")
-            else:
-                print("** class doesn't exist **")
-        else:
-            pass
-        print(input)
+        test = self.get_objects()
+        # if input == "":
+        #     print("** class name missing **")
+        # elif len(input) != 2:
+        #     if model exist:
+        #         print("** instance id missing **")
+        #     else:
+        #         print("** class doesn't exist **")
+        # else:
+        #     if id exist:
+        #         print(the instance)
+        #     else:
+        #         print("** no instance found **")
+        print(test)
         # file_storage = FileStorage()
         # file_storage.reload()
         # all_objs = file_storage.all()
@@ -66,6 +70,24 @@ class HBNBCommand(cmd.Cmd):
         # if input[1] != "BaseModel":
         #     print("** class doesn't exist **")
         # print(input)
+
+    def get_objects(self):
+        """ This is a method that gets all the objects\
+            that are currently in the storage.
+            Return:
+                A dictionary of the names\
+                and ids of objects in the memory. """
+        file_storage = FileStorage()
+        file_storage.reload()
+        all_objs = file_storage.all()
+        keys = []
+        for key in all_objs.keys():
+            keys.append(key)
+        keys_dict = {}
+        for item in keys:
+            key_value = item.split(".")
+            keys_dict[key_value[1]] = key_value[0]
+        return keys_dict
 
     def do_destroy(self, line):
         """ Deletes an instance based on the class name and id\
