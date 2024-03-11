@@ -66,7 +66,6 @@ class BaseModel:
             self.id = str(idgen())
             self.created_at = dt.now()
             self.updated_at = self.created_at
-#            print(self)
             storage.new(self)
 
     def __str__(self):
