@@ -16,14 +16,13 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, line):
-        print()
         """ EOF command to exit the program """
         return True
 
     def do_create(self, line):
-        """ Creates a new instance of BaseModel,
-        saves it (to the JSON file) and prints the id.
-        Ex: $ create BaseModel """
+        """ Creates a new instance of BaseModel,\
+            saves it (to the JSON file) and prints the id.
+            Ex: $ create BaseModel """
         if line == "":
             print("** class name missing **")
         elif line != "BaseModel":
@@ -34,7 +33,9 @@ class HBNBCommand(cmd.Cmd):
             print(basemodel.id)
 
     def do_show(self, line):
-        """  Prints the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234 """
+        """ Prints the string representation of an instance\
+            based on the class name and id.
+            Ex: $ show BaseModel 1234-1234-1234 """
         input = ".".join(line.split())
         file_storage = FileStorage()
         all_objs = file_storage.all()
