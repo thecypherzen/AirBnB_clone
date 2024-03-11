@@ -4,7 +4,7 @@ This is a program that contains the entry point of the command interpreter
 """
 import cmd
 from models.base_model import BaseModel
-from models.engine.file_storage import
+from models.engine.file_storage import FileStorage
 
 class HBNBCommand(cmd.Cmd):
     """ This is a class that defines the command interpreter """
@@ -34,7 +34,18 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """  Prints the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234 """
-
+        input = ".".join(line.split())
+        file_storage = FileStorage()
+        all_objs = file_storage.all()
+        print("--")
+        print(all_objs)
+        keys = []
+        for key in all_objs.keys():
+            print(key)
+        #     print("** class name missing **")
+        # if input[1] != "BaseModel":
+        #     print("** class doesn't exist **")
+        # print(input)
 
     def do_destroy(self, line):
         """ Deletes an instance based on the class name and id (save the change into the JSON file). Ex: $ destroy BaseModel 1234-1234-1234 """
