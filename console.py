@@ -20,7 +20,8 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """ This function is called when the user passes and emptyline to the console """
+        """ This function is called when the user\
+            passes and emptyline to the console """
         return True
 
     def do_create(self, line):
