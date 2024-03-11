@@ -3,7 +3,7 @@
 The **AirBnB clone - The console** project pushes further the introduction to the \
 back-end development and OOP.
 objectives are to understand the following:
-- What is localhost/127.0.0.1
+- Unittest
 - What is 0.0.0.0
 - What is /etc/hosts
 -  How to display your machine’s active network interfaces
