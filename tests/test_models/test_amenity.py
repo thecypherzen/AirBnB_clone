@@ -26,8 +26,8 @@ class TestAmenity(TestCase):
         cls.AM = amenity.Amenity
         cls.FS = file_storage.FileStorage
         cls.amenity = cls.AM(name="JukeBox")
+
     def test_10_amenity_init(self):
-        #print(self.amenity)
         pass
 
 
