@@ -66,6 +66,7 @@ class HBNBCommand(cmd.Cmd):
             Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com' """
         pass
 
+
 if __name__ == '__main__':
     import sys
 
