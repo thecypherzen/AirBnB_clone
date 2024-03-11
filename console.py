@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def emptyline(self):
-        pass
+        return True
 
     def do_create(self, line):
         """ Creates a new instance of BaseModel,\
