@@ -67,4 +67,10 @@ class HBNBCommand(cmd.Cmd):
         pass
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    import sys
+
+    if len(sys.argv) > 1:
+        # Implementation of non interactive mode
+        HBNBCommand().onecmd(''.join(sys.argv[1:]))
+    else:
+        HBNBCommand().cmdloop()
