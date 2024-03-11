@@ -15,7 +15,6 @@ class Amenity(BaseModel):
 
         Sets all attributes to empty strings
         """
-        print("....initializing Amenity....")
         name = kwargs.pop("name", "")
         super().__init__(**kwargs)
         self.name = name

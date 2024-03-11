@@ -17,7 +17,6 @@ class Review(BaseModel):
 
         Sets all attributes empty strings
         """
-        print("...Initializing Review...")
         place_id = kwargs.pop("place_id", "")
         user_id = kwargs.pop("user_id", "")
         text = kwargs.pop("text", "")

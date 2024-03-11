@@ -28,7 +28,6 @@ class Place(BaseModel):
 
         Sets all attributes empty or null values
         """
-        print("....initializing Place....")
         city_id = kwargs.pop("city_id", "")
         user_id = kwargs.pop("user_id", "")
         description = kwargs.pop("description", "")

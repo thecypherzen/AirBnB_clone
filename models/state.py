@@ -15,7 +15,6 @@ class State(BaseModel):
 
         Sets name to empty string at initialization
         """
-        print("...Initializing State....")
         name = kwargs.pop("name", "")
         super().__init__(**kwargs)
         self.name = name
