@@ -60,12 +60,13 @@ class BaseModel:
             for key in kwargs.keys():
                 if key not in to_skip:
                     setattr(self, key, kwargs[key])
-            if "id" not in key:
+            if "id" not in kwargs.keys():
                 storage.new(self)
         else:
             self.id = str(idgen())
             self.created_at = dt.now()
             self.updated_at = self.created_at
+#            print(self)
             storage.new(self)
 
     def __str__(self):
