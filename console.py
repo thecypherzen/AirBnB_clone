@@ -54,7 +54,9 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_all(self, line):
-        """ Prints all string representation of all instances based or not on the class name. Ex: $ all BaseModel or $ all """
+        """ Prints all string representation of all instance
+            based or not on the class name.
+            Ex: $ all BaseModel or $ all """
         pass
 
     def do_update(self, line):
