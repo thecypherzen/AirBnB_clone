@@ -22,7 +22,7 @@ objectives are to understand the following:
   - **Month** 5, **Week** 1, **Day** 3.
 
 # Technologies #
-- All shell scripts written in GNU bash 5.0.17(1)-release (x86_64-pc-linux-gnu).
+- All your files will be interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
 - File types can be identified by their extensions
 - Code tested on Ubuntu 20.04 LTS.
 
