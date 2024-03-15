@@ -1,0 +1,18 @@
+header{
+	height: 70px;
+	width: 100%;
+	background-color: #fff;
+	border-bottom: 1px #ccc solid;
+}
+header #logo{
+	padding-block: 10px;
+	padding-left: 20px;
+	width: 150px;
+	height: 80%;
+}
+header #logo a{
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	background: url('../images/logo.png') no-repeat left center/contain;
+}
