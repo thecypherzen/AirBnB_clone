@@ -3,13 +3,16 @@ header{
 	width: 100%;
 	background-color: var(--color-light);
 	border-bottom: var(--border-default);
+	display: flex;
 }
+
 header #logo{
 	padding-block: 10px;
-	padding-left: 20px;
-	width: 140px;
-	height: 80%;
+	margin-left: 20px;
+	width: 120px;
+	height: 100%;
 }
+
 header #logo a{
 	display: inline-block;
 	height: 100%;
