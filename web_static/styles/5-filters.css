@@ -8,10 +8,29 @@ section.filters{
 	align-items: center;
 }
 
-.filters > input{
+/*.filters > input{
 	width: 80%;
 	height: 48px;
 	border: none;
+}*/
+
+.filters .locations,
+.filters .amenities {
+	width: 25%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-inline: 5%;
+}
+
+.filters .filter-blank{
+	width: 30%;
+	height: 100%;
+}
+
+.filters > div:first-child{
+	border-right: var(--border-light);
 }
 
 .filters button{
