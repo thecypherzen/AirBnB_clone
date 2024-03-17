@@ -1,9 +1,16 @@
+:root{
+	--font_size_default: 14px;
+	--color-primary: #484848;
+	--color-dark: #484848;
+	--color-light: #fff;
+	--border-default: 1px #ccc solid;
+}
 body{
 	padding:0;
 	margin:0;
-	color: #484848;
+	color: var(--color-primary);
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 14px;
+	font-size: var(--font_size_default);
 }
 a{
 	text-decoration: none;

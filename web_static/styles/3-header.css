@@ -1,13 +1,13 @@
 header{
 	height: 70px;
 	width: 100%;
-	background-color: #fff;
-	border-bottom: 1px #ccc solid;
+	background-color: var(--color-light);
+	border-bottom: var(--border-default);
 }
 header #logo{
 	padding-block: 10px;
 	padding-left: 20px;
-	width: 150px;
+	width: 140px;
 	height: 80%;
 }
 header #logo a{
