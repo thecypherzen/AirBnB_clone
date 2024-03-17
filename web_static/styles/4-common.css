@@ -1,0 +1,53 @@
+:root{
+	--font_size_default: 14px;
+	--color-primary: #484848;
+	--color-secondary: #FF5A5F;
+	--color-dark: #484848;
+	--color-light: #fff;
+	--color-grey: #333;
+	--border-default: 1px #ccc solid;
+	--border-light: 1px #ddd solid;
+	--max-width: 1000px;
+	--height-70: 70px;
+}
+
+*{
+	margin: 0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+body{
+	color: var(--color-primary);
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: var(--font_size_default);
+}
+
+a {
+	text-decoration: none;
+}
+
+.btn{
+	display: inline-block;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	box-shadow: none;
+	text-decoration: none;
+}
+
+.btn-primary{
+	background-color: var(--color-secondary);
+	font-size: 18px;
+	color: var(--color-light);
+}
+
+.btn-rounded{
+	border-radius: 4px;
+}
+
+.container{
+	max-width: var(--max-width);
+	margin-block:30px !important;
+	margin: auto;
+}

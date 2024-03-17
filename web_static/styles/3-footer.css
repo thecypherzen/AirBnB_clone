@@ -1,9 +1,9 @@
 footer{
-	background-color: #fff;
+	background-color: var(--color-light);
 	margin: auto;
 	width: 100%;
 	height: 60px;
-	border-top: 1px solid #ccc;
+	border-top: var(--border-default);
 	position: absolute;
 	bottom: 0;
 }
