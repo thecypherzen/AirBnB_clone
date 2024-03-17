@@ -1,0 +1,22 @@
+.places h1, h2 {
+	font-size: var(--fs-big);
+}
+
+.places {
+	display: grid;
+	grid-template-columns: repeat(2, 390px);
+	margin: var(--sz-sm);
+	padding: var(--sz-sm);
+}
+
+.places > h1:first-child{
+	grid-column: 1/span 2;
+}
+
+.place-item {
+	padding: var(--sz-sm);
+	margin: var(--sz-sm);
+	border: var(--border-secondary);
+	border-radius: 4px;
+	text-align: center;
+}

@@ -4,8 +4,13 @@
 	--color-dark: #484848;
 	--color-light: #fff;
 	--color-grey: #FAFAFA;
+
+	/* Borders */
 	--border-default: 1px #ccc solid;
 	--border-light: 1px #ddd solid;
+	--border-secondary: 1px var(--color-secondary) solid;
+
+	/* Widths and sizes */
 	--max-width: 1000px;
 	--height-70: 70px;
 	--sz-xsm: 10px;
@@ -19,6 +24,7 @@
 	--fs-regular: 14px;
 	--fs-large: 16px;
 	--fs-larger: 18px;
+	--fs-big: 30px;
 }
 
 *{
