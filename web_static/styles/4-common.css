@@ -13,6 +13,7 @@
 	/* Widths and sizes */
 	--max-width: 1000px;
 	--height-70: 70px;
+	--sz-mini: 5px;
 	--sz-xsm: 10px;
 	--sz-sm: 20px;
 	--sz-md: 40px;
@@ -37,6 +38,8 @@ body{
 	color: var(--color-primary);
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: var(--fs_regular);
+	position: relative;
+	min-height: 100vh;
 }
 
 
