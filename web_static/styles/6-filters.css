@@ -68,6 +68,7 @@ ul.popover{
 	border-radius: 4px;
 	padding-inline: var(--sz-md);
 	padding-block: var(--sz-sm);
+	z-index: 10;
 }
 
 .popover h2{

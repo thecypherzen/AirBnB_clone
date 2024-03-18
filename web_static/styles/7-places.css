@@ -3,14 +3,15 @@
 }
 
 .places {
-	display: grid;
-	grid-template-columns: repeat(2, 390px);
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	margin: var(--sz-sm);
 	padding: var(--sz-sm);
 }
 
 .places > h1:first-child{
-	grid-column: 1/span 2;
+	width: 100%;
 }
 
 .place-item {
@@ -19,4 +20,5 @@
 	border: var(--border-secondary);
 	border-radius: 4px;
 	text-align: center;
+	width: 390px;
 }
