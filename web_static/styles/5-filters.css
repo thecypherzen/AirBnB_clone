@@ -14,8 +14,8 @@ section.filters{
 	border: none;
 }*/
 
-.filters .locations,
-.filters .amenities {
+.filters .locations-filter,
+.filters .amenities-filter {
 	width: 25%;
 	height: 100%;
 	display: flex;
