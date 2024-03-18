@@ -17,6 +17,8 @@ body{
 	color: var(--color-primary);
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: var(--font_size_default);
+	min-height: 100vh;
+	position: relative;
 }
 a{
 	text-decoration: none;
