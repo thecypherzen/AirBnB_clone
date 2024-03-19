@@ -1,0 +1,15 @@
+footer{
+	background-color: var(--color-light);
+	margin: auto;
+	width: 100%;
+	height: var(--height-60);
+	border-top: var(--border-default);
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+footer > p {
+	text-align: center;
+}

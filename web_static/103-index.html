@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width initial-scale=1.0"/>
+		<meta name="description" content="Task 12 > Accessibility | Airbnb Clone"/>
+		<link rel="stylesheet" href="styles/103-common.css" />
+		<link rel="stylesheet" href="styles/103-filters.css" />
+		<link rel="stylesheet" href="styles/103-header.css" />
+		<link rel="stylesheet" href="styles/103-footer.css"/>
+		<link rel="stylesheet" href="styles/103-places.css"/>
+		<link rel="icon" type="image/x-icon" href="images/icon.png">
+		<title>
+			Task 12(103) | Accessibility | Airbnb - Web Static
+		</title>
+	</head>
+
+	<body>
+		<header>
+			<div id="logo">
+				<a href="103-index.html" role="button" tabindex="0"
+					aria-label="Airbnb clone Logo. Click to return to home page.">
+				</a>
+			</div>
+		</header>
+
+		<div class="content-wrapper">
+			<div class="container">
+				<!-- Filters Section -->
+				<section class="filters">
+					<div class="locations-filter" tabindex="0"
+						aria-labelledby="locations-filter-label">
+						<p id="locations-filter-label" class="no-display">
+							Filter locations by state and city
+						</p>
+						<h3 class="margin-0">States</h3>
+						<h4 class="margin-0">Lorem, dolor...</h4>
+
+						<ul class="hidden popover no-list" tabindex="0" role="tablist">
+							<li class="popover-group" tabindex="0" role="tab"
+								tabindex="0" aria-setsize="2" aria-posinset="1"
+								aria-labelledby="state-name">
+								<h2 id="state-name" tabindex="0">Kaduna:</h2>
+								<ul class="no-list" role="tablist">
+									<li role="tab" aria-setsize="3" aria-posinset="1"
+										tabindex="0">Kafanchan</li>
+									<li role="tab" aria-setsize="3" aria-posinset="2"
+										tabindex="0">Zaria</li>
+									<li role="tab" aria-setsize="3" aria-posinset="3"
+										tabindex="0">Zonkwa</li>
+								</ul>
+							</li>
+							<li class="popover-group" tabindex="0" role="tab"
+								tabindex="0" aria-setsize="2" aria-posinset="1"
+								aria-labelledby="state-name">
+								<h2 id="state-name" tabindex="0">Cross River:</h2>
+								<ul class="no-list" role="tablist">
+									<li role="tab" aria-setsize="2" aria-posinset="1"
+										tabindex="0">Calabar</li>
+									<li role="tab" aria-setsize="2" aria-posinset="2"
+										tabindex="0">Ogoja</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="amenities-filter" tabindex="0"
+						aria-labelledby="amenities-filter-label">
+						<p id="amenities-filter-label" class="no-display">
+							Filter locations by amenities
+						</p>
+						<h3 class="margin-0">Amenities</h3>
+						<h4 class="margin-0">Lorem, dolor, sit...</h4>
+						<ul class="hidden popover no-list" tabindex="0" role="tablist">
+							<div class="popover-group" tabindex="0">
+								<li role="tab" aria-setsize="3"
+									aria-posinset="1" tabindex="0">Free Wifi</li>
+								<li role="tab" aria-setsize="3"
+									aria-posinset="2" tabindex="0">24hr Surveillance</li>
+								<li role="tab" aria-setsize="3"
+									aria-posinset="3" tabindex="0">Swimming pool</li>
+							</div>
+						</ul>
+					</div>
+					<div class="filter-blank"></div>
+					<!--<input type="text" name="filters" id="filters">-->
+					<button class="btn btn-primary btn-rounded" tabindex="0"
+						role="button" aria-label="Click to filter locations">
+						Search
+					</button>
+				</section>
+
+				<!-- Places Section -->
+				<section class="places">
+					<h1>Places</h1>
+					<article class="place-item" tabindex="0" role="search"
+						aria-labelledby="place-name">
+						<div class="place-item-header">
+							<h2 id="place-name" class="text-center">Country home</h2>
+							<div class="price_by_night" tabindex="0"
+								aria-labelledby="price_by_night">
+								<p id="price_by_night">&dollar;80</p>
+							</div>
+						</div>
+						<div class="information" aria-label="location information"
+							role="tablist">
+							<div class="info-group max_guest" tabindex="0" role="tab"
+								aria-labelledby="number_of_guests" aria-setsize="3"
+								aria-posinset="1">
+								<div class=" info-icon"></div>
+								<p id="number_of_guests">2 Guests</p>
+							</div>
+							<div class="info-group number_rooms" tabindex="0"
+								aria-labelledby="number_of_bedrooms" role="tab" aria-setsize="3" aria-posinset="2">
+								<div class=" info-icon"></div>
+								<p id="number_of_bedrooms">1 Bedroom</p>
+							</div>
+							<div class="info-group number_bathrooms" tabindex="0"
+								aria-labelledby="number_of_bathrooms" role="tab" aria-setsize="3" aria-posinset="3">
+								<div class="info-icon"></div>
+								<p id="number_of_bathrooms">1 Bathroom</p>
+							</div>
+						</div>
+						<div class="user" aria-labelledby="location_owner" tabindex="0">
+							<p id="location_owner"><strong>Owner:</strong> John Doe</p>
+						</div>
+						<div class="description" aria-label="location_description"
+							role="complementary" tabindex="0">
+							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum nostrum deserunt reprehenderit quis amet earum, minus asperiores blanditiis veritatis impedit!
+						</div>
+						<div class="amenities" tabindex="0"
+							aria-label="location amenities">
+							<h2>Amenities</h2>
+							<ul class="amenities-list no-list" role="tablist">
+								<li class="amenities-group" role="tab"
+									aria-setsize="3" aria-posinset="1" tabindex="0"
+									aria-labelledby="amenity-item">
+									<div class="icon-wifi amenity-icon"></div>
+									<p id="amenity-item">Free Wifi</p>
+								</li>
+								<li class="amenities-group" role="tab" aria-setsize="3"
+									aria-posinset="2" tabindex="0"
+									aria-labelledby="amenity-item">
+									<div class="icon-tv amenity-icon"></div>
+									<p id="amenity-item">TV</p>
+								</li>
+								<li class="amenities-group" role="tab"
+									aria-setsize="3" aria-posinset="3" tabindex="0">
+									<div class="icon-pets amenity-icon"></div>
+									<p id="amenity-item">Pets allowed </p>
+								</li>
+							</ul>
+						</div>
+						<div id="reviews" class="reviews" aria-label="location reviews"
+							tabindex="0">
+							<h2>2 Reviews</h2>
+							<ul class="no-list" role="tablist">
+								<li class="review-group" role="tab" aria-setsize="2"
+									aria-posinset="1" tabindex="0">
+									<h3 class="margin-0" tabindex="0"
+										aria-label="review author">
+										From Jonah Innocent on 18 March 2024
+									</h3>
+									<p tabindex="0" aria-label="review message">
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quidem sunt quam autem quisquam laborum.
+									</p>
+								</li>
+								<li class="review-group" role="tab" aria-setsize="2"
+									aria-posinset="2" tabindex="0">
+									<h3 class="margin-0" tabindex="0"
+										aria-label="review author">
+										From Zachari Allison on 18 December 2023
+									</h3>
+									<p tabindex="0" aria-label="review message">
+										Lorem ipsum dolor sit amet!
+									</p>
+								</li>
+							</ul>
+						</div>
+					</article>
+					<article class="place-item" tabindex="0" role="search"
+						aria-labelledby="place-name">
+						<div class="place-item-header">
+							<h2 id="place-name" class="text-center">Pearson's park</h2>
+							<div class="price_by_night" tabindex="0"
+								aria-labelledby="price_by_night">
+								<p id="price_by_night">&dollar;20</p>
+							</div>
+						</div>
+						<div class="information" aria-label="location information"
+							role="tablist">
+							<div class="info-group max_guest" tabindex="0" role="tab"
+								aria-labelledby="number_of_guests" aria-setsize="3"
+								aria-posinset="1">
+								<div class=" info-icon"></div>
+								<p id="number_of_guests">1 Guests</p>
+							</div>
+							<div class="info-group number_rooms" tabindex="0"
+								aria-labelledby="number_of_bedrooms" role="tab" aria-setsize="3" aria-posinset="2">
+								<div class=" info-icon"></div>
+								<p id="number_of_bedrooms">2 Bedrooms</p>
+							</div>
+							<div class="info-group number_bathrooms" tabindex="0"
+								aria-labelledby="number_of_bathrooms" role="tab" aria-setsize="3" aria-posinset="3">
+								<div class="info-icon"></div>
+								<p id="number_of_bathrooms">1 Bathrooms</p>
+							</div>
+						</div>
+						<div class="user" aria-labelledby="location_owner" tabindex="0">
+							<p id="location_owner"><strong>Owner:</strong> Arya Phlank</p>
+						</div>
+						<div class="description" aria-label="location_description"
+							role="complementary" tabindex="0">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse dolor ullam impedit veniam placeat ducimus minima laboriosam harum delectus reprehenderit nam labore nostrum, repudiandae non deleniti quod fugiat similique corrupti omnis quos! Eius consequatur reiciendis alias, a consequuntur ullam.
+						</div>
+						<div class="amenities" tabindex="0"
+							aria-label="location amenities">
+							<h2>Amenities</h2>
+							<ul class="amenities-list no-list" role="tablist">
+								<li class="amenities-group" role="tab"
+									aria-setsize="2" aria-posinset="1" tabindex="0"
+									aria-labelledby="amenity-item">
+									<div class="icon-pool amenity-icon"></div>
+									<p id="amenity-item">Swimming pool</p>
+								</li>
+								<li class="amenities-group" role="tab" aria-setsize="2"
+									aria-posinset="2" tabindex="0"
+									aria-labelledby="amenity-item">
+									<div class="icon-cctv amenity-icon"></div>
+									<p id="amenity-item">24hr Surveillance</p>
+								</li>
+							</ul>
+						</div>
+						<div id="reviews" class="reviews" aria-label="location reviews"
+							tabindex="0">
+							<h2>3 Reviews</h2>
+							<ul class="no-list" role="tablist">
+								<li class="review-group" role="tab" aria-setsize="3"
+									aria-posinset="1" tabindex="0">
+									<h3 class="margin-0" tabindex="0"
+										aria-label="review author">
+										From Ohega Love on 13 November 2022
+									</h3>
+									<p tabindex="0" aria-label="review message">
+										Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore ullam sit earum laboriosam ab perferendis, libero soluta non officiis necessitatibus?
+									</p>
+								</li>
+								<li class="review-group" role="tab" aria-setsize="3"
+									aria-posinset="2" tabindex="0">
+									<h3 class="margin-0" tabindex="0"
+										aria-label="review author">
+										From Ali Denen on 1st April 2024
+									</h3>
+									<p tabindex="0" aria-label="review message">
+										Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore facilis suscipit error fugit recusandae sequi.
+									</p>
+								</li>
+								<li class="review-group" role="tab" aria-setsize="3"
+									aria-posinset="3" tabindex="0">
+									<h3 class="margin-0" tabindex="0"
+										aria-label="review author">
+										From Blessed Bee on 27 August 2021
+									</h3>
+									<p tabindex="0" aria-label="review message">
+										Awesome place, honestly. You should try.
+									</p>
+								</li>
+							</ul>
+						</div>
+					</article>
+					<article class="place-item" tabindex="0" role="search"
+						aria-labelledby="place-name">
+						<div class="place-item-header">
+							<h2 id="place-name" class="text-center">Rendezvous Amigos</h2>
+							<div class="price_by_night" tabindex="0"
+								aria-labelledby="price_by_night">
+								<p id="price_by_night">&dollar;150</p>
+							</div>
+						</div>
+						<div class="information" aria-label="location information"
+							role="tablist">
+							<div class="info-group max_guest" tabindex="0" role="tab"
+								aria-labelledby="number_of_guests" aria-setsize="3"
+								aria-posinset="1">
+								<div class=" info-icon"></div>
+								<p id="number_of_guests">4 Guests</p>
+							</div>
+							<div class="info-group number_rooms" tabindex="0"
+								aria-labelledby="number_of_bedrooms" role="tab" aria-setsize="3" aria-posinset="2">
+								<div class=" info-icon"></div>
+								<p id="number_of_bedrooms">2 Bedrooms</p>
+							</div>
+							<div class="info-group number_bathrooms" tabindex="0"
+								aria-labelledby="number_of_bathrooms" role="tab" aria-setsize="3" aria-posinset="3">
+								<div class="info-icon"></div>
+								<p id="number_of_bathrooms">2 Bathrooms</p>
+							</div>
+						</div>
+						<div class="user" aria-labelledby="location_owner" tabindex="0">
+							<p id="location_owner"><strong>Owner:</strong> Vickie Palmer</p>
+						</div>
+						<div class="description" aria-label="location_description"
+							role="complementary" tabindex="0">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi voluptates minima impedit iure neque assumenda officiis eius architecto tempora maxime.
+						</div>
+						<div class="amenities" tabindex="0"
+							aria-label="location amenities">
+							<h2>Amenities</h2>
+							<ul class="amenities-list no-list" role="tablist">
+								<li class="amenities-group" role="tab"
+									aria-setsize="3" aria-posinset="1" tabindex="0"
+									aria-labelledby="amenity-item">
+									<div class="icon-gym amenity-icon"></div>
+									<p id="amenity-item">24hr gym service</p>
+								</li>
+								<li class="amenities-group" role="tab" aria-setsize="3"
+									aria-posinset="2" tabindex="0"
+									aria-labelledby="amenity-item">
+									<div class="icon-car_rental amenity-icon"></div>
+									<p id="amenity-item">Car rental</p>
+								</li>
+								<li class="amenities-group" role="tab" aria-setsize="3"
+									aria-posinset="3" tabindex="0"
+									aria-labelledby="amenity-item">
+									<div class="icon-laundry amenity-icon"></div>
+									<p id="amenity-item">Laundry</p>
+								</li>
+							</ul>
+						</div>
+						<div id="reviews" class="reviews" aria-label="location reviews"
+							tabindex="0">
+							<h2>1 Reviews</h2>
+							<ul class="no-list" role="tablist">
+								<li class="review-group" role="tab" aria-setsize="1"
+									aria-posinset="1" tabindex="0">
+									<h3 class="margin-0" tabindex="0"
+										aria-label="review author">
+										From Anchile Arch on the 1 March
+									</h3>
+									<p tabindex="0" aria-label="review message">
+										Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias magnam hic necessitatibus harum corporis, accusamus officiis laboriosam voluptatem.
+									</p>
+								</li>
+							</ul>
+						</div>
+					</article>
+				</section>
+			</div>
+		</div>
+
+		<footer>
+			<p>Best School</p>
+		</footer>
+	</body>
+</html>
