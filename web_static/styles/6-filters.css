@@ -66,6 +66,7 @@ ul.popover{
 
 .popover h2 {
 	font-size: var(--fs-large);
+	margin-bottom: 0px;
 }
 
 
@@ -74,9 +75,9 @@ ul {
 }
 
 ul ul {
-	margin-left: var(--sz-sm);
+	margin-left: calc(var(--sz-sm) + 10px);
 }
 
 ul li {
-	margin-bottom: var(--sz-xsm);
+	margin-bottom: var(--sz-mini);
 }
