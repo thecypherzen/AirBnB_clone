@@ -43,19 +43,19 @@ class HBNBCommand(cmd.Cmd):
             based on the class name and id.
             Ex: $ show BaseModel 1234-1234-1234 """
         input = line.split()
-        test = self.get_objects()
-        # if input == "":
-        #     print("** class name missing **")
-        # elif len(input) != 2:
-        #     if model exist:
-        #         print("** instance id missing **")
-        #     else:
-        #         print("** class doesn't exist **")
-        # else:
-        #     if id exist:
-        #         print(the instance)
-        #     else:
-        #         print("** no instance found **")
+        keys_dict = self.get_objects()
+        if input == "":
+            print("** class name missing **")
+        elif len(input) != 2:
+            if input in keys_dict.values():
+                print("** instance id missing **")
+            else:
+                print("** class doesn't exist **")
+        else:
+            if :
+                print(the instance)
+            else:
+                print("** no instance found **")
         print(test)
         # file_storage = FileStorage()
         # file_storage.reload()
