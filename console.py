@@ -44,39 +44,30 @@ class HBNBCommand(cmd.Cmd):
             Ex: $ show BaseModel 1234-1234-1234 """
         input = line.split()
         keys_dict = self.get_objects()
-        if input == "":
+        if not input:
             print("** class name missing **")
-        elif len(input) != 2:
-            if input in keys_dict.values():
-                print("** instance id missing **")
-            else:
-                print("** class doesn't exist **")
         else:
-            if :
-                print(the instance)
-            else:
-                print("** no instance found **")
-        print(test)
-        # file_storage = FileStorage()
-        # file_storage.reload()
-        # all_objs = file_storage.all()
-        # print(all_objs[input])
-        # print("--")
-        # print(all_objs)
-        # keys = []
-        # for key in all_objs.keys():
-        #     keys = key
-        #     print("** class name missing **")
-        # if input[1] != "BaseModel":
-        #     print("** class doesn't exist **")
-        # print(input)
+            if input[0] in keys_dict.values() and len(input) == 1:
+                print("** instance id missing **")
+            elif input[0] not in keys_dict.values() and len(input) == 1:
+                print("** class doesn't exist **")
+            elif input[1] in keys_dict.keys():
+                if input[0] not in keys_dict.values():
+                    print("** no instance found **")
+                else:
+                    file_storage = FileStorage()
+                    file_storage.reload()
+                    all_objs = file_storage.all()
+                    print(all_objs[".".join(input)])
 
     def get_objects(self):
-        """ This is a method that gets all the objects\
+        """
+        This is a method that gets all the objects\
             that are currently in the storage.
             Return:
                 A dictionary of the names\
-                and ids of objects in the memory. """
+                and ids of objects in the memory.
+        """
         file_storage = FileStorage()
         file_storage.reload()
         all_objs = file_storage.all()
