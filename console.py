@@ -10,6 +10,8 @@ from models.engine.file_storage import FileStorage
 class HBNBCommand(cmd.Cmd):
     """ This is a class that defines the command interpreter """
     prompt = "(hbnb) "
+    classes = ["BaseModel", "Amenity", "City", "Place",
+               "Review", "State", "User"]
 
     def do_quit(self, line):
         """ Quit command to exit the program """
@@ -31,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
             Ex: $ create BaseModel """
         if line == "":
             print("** class name missing **")
-        elif line != "BaseModel":
+        elif line not in self.classes:
             print("** class doesn't exist **")
         else:
             basemodel = BaseModel()
