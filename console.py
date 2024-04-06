@@ -3,7 +3,7 @@
 This is a program that contains the entry point of the command interpreter
 """
 import cmd
-from models.base_model import BaseModel
+from models import amenity, base_model, city, place, review, state, user
 from models.engine.file_storage import FileStorage
 
 
@@ -23,22 +23,57 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """ This function is called when the user\
-            passes and emptyline to the console """
+        """
+            This function is called when the user\
+            passes and emptyline to the console
+        """
         pass
 
     def do_create(self, line):
-        """ Creates a new instance of BaseModel,\
+        """
+            Creates a new instance of the specified class,\
             saves it (to the JSON file) and prints the id.
-            Ex: $ create BaseModel """
+            Ex: $ create BaseModel
+        """
         if line == "":
             print("** class name missing **")
         elif line not in self.classes:
             print("** class doesn't exist **")
         else:
-            basemodel = BaseModel()
+            self.create_the_model(line)
+
+    def create_the_model(self, line):
+        """
+        Creates an object based on the class specified by the user
+        """
+        if (line == "BaseModel"):
+            basemodel = base_model.BaseModel()
             basemodel.save()
             print(basemodel.id)
+        elif (line == "Amenity"):
+            Amenity = amenity.Amenity()
+            Amenity.save()
+            print(Amenity.id)
+        elif (line == "City"):
+            City = city.City()
+            City.save()
+            print(City.id)
+        elif (line == "Place"):
+            Place = place.Place()
+            Place.save()
+            print(Place.id)
+        elif (line == "Review"):
+            Review = review.Review()
+            Review.save()
+            print(Review.id)
+        elif (line == "State"):
+            State = state.State()
+            State.save()
+            print(State.id)
+        elif (line == "User"):
+            User = user.User()
+            User.save()
+            print(User.id)
 
     def do_show(self, line):
         """ Prints the string representation of an instance\
@@ -108,10 +143,30 @@ class HBNBCommand(cmd.Cmd):
                     file_storage.save()
 
     def do_all(self, line):
-        """ Prints all string representation of all instance\
+        """
+        Prints all string representation of all instance\
             based or not on the class name.
-            Ex: $ all BaseModel or $ all """
-        pass
+            Ex: $ all BaseModel or $ all
+        """
+        if line:
+            if line not in self.classes:
+                print("** class doesn't exist **")
+            else:
+                file_storage = FileStorage()
+                file_storage.reload()
+                all_objs = file_storage.all()
+                for key in all_objs.keys():
+                    key_list = key.split(".")
+                    if key_list[0] == line:
+                        print(all_objs[key])
+                    else:
+                        continue
+        else:
+            file_storage = FileStorage()
+            file_storage.reload()
+            all_objs = file_storage.all()
+            for key in all_objs.keys():
+                print(all_objs[key])
 
     def do_update(self, line):
         """ Updates an instance based on the class name and id by\
