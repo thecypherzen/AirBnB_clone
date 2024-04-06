@@ -49,12 +49,12 @@ class HBNBCommand(cmd.Cmd):
         if not input:
             print("** class name missing **")
         else:
-            if input[0] in keys_dict.values() and len(input) == 1:
+            if input[0] in self.classes and len(input) == 1:
                 print("** instance id missing **")
-            elif input[0] not in keys_dict.values() and len(input) == 1:
+            elif input[0] not in self.classes:
                 print("** class doesn't exist **")
-            elif input[1] in keys_dict.keys():
-                if input[0] not in keys_dict.values():
+            else:
+                if input[1] not in keys_dict.keys():
                     print("** no instance found **")
                 else:
                     file_storage = FileStorage()
@@ -83,10 +83,29 @@ class HBNBCommand(cmd.Cmd):
         return keys_dict
 
     def do_destroy(self, line):
-        """ Deletes an instance based on the class name and id\
+        """
+        Deletes an instance based on the class name and id\
             (save the change into the JSON file)
-            Ex: $ destroy BaseModel 1234-1234-1234 """
-        pass
+            Ex: $ destroy BaseModel 1234-1234-1234
+        """
+        input = line.split()
+        keys_dict = self.get_objects()
+        if not input:
+            print("** class name missing **")
+        else:
+            if input[0] in self.classes and len(input) == 1:
+                print("** instance id missing **")
+            elif input[0] not in self.classes:
+                print("** class doesn't exist **")
+            else:
+                if input[1] not in keys_dict.keys():
+                    print("** no instance found **")
+                else:
+                    file_storage = FileStorage()
+                    file_storage.reload()
+                    all_objs = file_storage.all()
+                    del all_objs[".".join(input)]
+                    file_storage.save()
 
     def do_all(self, line):
         """ Prints all string representation of all instance\
