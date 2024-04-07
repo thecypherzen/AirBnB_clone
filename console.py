@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
 
     def create_the_model(self, line):
         """
-        Creates an object based on the class specified by the user
+            Creates an object based on the class specified by the user
         """
         if (line == "BaseModel"):
             basemodel = base_model.BaseModel()
@@ -76,9 +76,11 @@ class HBNBCommand(cmd.Cmd):
             print(User.id)
 
     def do_show(self, line):
-        """ Prints the string representation of an instance\
+        """ 
+            Prints the string representation of an instance\
             based on the class name and id.
-            Ex: $ show BaseModel 1234-1234-1234 """
+            Ex: $ show BaseModel 1234-1234-1234
+        """
         input = line.split()
         keys_dict = self.get_objects()
         if not input:
@@ -99,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
 
     def get_objects(self):
         """
-        This is a method that gets all the objects\
+            This is a method that gets all the objects\
             that are currently in the storage.
             Return:
                 A dictionary of the names\
@@ -119,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """
-        Deletes an instance based on the class name and id\
+            Deletes an instance based on the class name and id\
             (save the change into the JSON file)
             Ex: $ destroy BaseModel 1234-1234-1234
         """
@@ -144,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """
-        Prints all string representation of all instance\
+            Prints all string representation of all instance\
             based or not on the class name.
             Ex: $ all BaseModel or $ all
         """
@@ -169,7 +171,8 @@ class HBNBCommand(cmd.Cmd):
                 print(all_objs[key])
 
     def do_update(self, line):
-        """ Updates an instance based on the class name and id by\
+        """ 
+            Updates an instance based on the class name and id by\
             adding or updating attribute,\
             (save the change into the JSON file).
             Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com' """
