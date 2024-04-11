@@ -1,27 +1,28 @@
 # Overview #
 
-The **Networking basics_2** project pushes further the introduction to the \
-basics of networking. It is a sequel to the Networking basics_0,  the project \
+The **AirBnB clone - The console** project pushes further the introduction to the \
+back-end development and OOP.
 objectives are to understand the following:
-- What is localhost/127.0.0.1
-- What is 0.0.0.0
-- What is /etc/hosts
--  How to display your machine’s active network interfaces
+- Unittest
+- Python packages
+- Serialization/Deserialization
+- *args, **kwargs
+- datetime
 
 
 ## Folder Details ###
-- **Date Created:** Sun Mar 3 2024.
+- **Date Created:** Mar 4 2024.
 - **Authors:** 
 	- [William Inyam](https.//github.com/thecypherzen)
-	- [Valentine](https.//github.com/ValentineNyibiam)
+	- [Valentine Nyibiam](https.//github.com/ValentineNyibiam)
 - **Project Timeline:**
-  - **Released:** Wed Feb. 28, 2024 - 6am.
-  - **1st Deadline:** Fri Mar 1, 2024 - 6am.
-  - **Duration:** 2 days.
-  - **Month** 5, **Week** 1, **Day** 3.
+  - **Released:** Mar. 4, 2024 - 6am.
+  - **1st Deadline:** Mar 11, 2024 - 6am.
+  - **Duration:** 7 days.
+  - **Month** 5, **Week** 3.
 
 # Technologies #
-- All shell scripts written in GNU bash 5.0.17(1)-release (x86_64-pc-linux-gnu).
+- All your files will be interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
 - File types can be identified by their extensions
 - Code tested on Ubuntu 20.04 LTS.
 

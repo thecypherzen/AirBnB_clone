@@ -16,14 +16,14 @@ class FileStorage:
 
     Attributes:
         __file_path(var:str): path to the JSON file; acts as local storage
-        --objects(var:dict): stores all objects by <class name>.id, eg.\
+        __objects(var:dict): stores all objects by <class name>.id, eg.\
                 to store a 'BaseModel' object with 'id=1212', the key \
                 will be BaseModel.1212
         all(method): returns the dictionary __objects
         new(method): sets a new obj in __objects with key <obj class name>.id
         save(method): serializes __objects to the JSON file (path: __file_path)
         reload(method): deserializes the JSON file to __objects \
-                (iff the JSON file exists; otherwise, do nothing. \
+                (if the JSON file exists; otherwise, do nothing. \
                 If the file doesn’t exist, no exception is raised)
 
     """
@@ -36,7 +36,7 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """Changes contnet of __objects dic
+        """Changes content of __objects dict
 
         In the __objects dictionary, it changes or sets the value of the key
                 '<object_name.id>.id' to 'obj' accordingly.
