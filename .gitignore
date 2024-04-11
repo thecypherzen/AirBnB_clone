@@ -2,7 +2,7 @@
 *#
 *.pyc
 *_test.txt
-*_test.py
+*_test*.py
 *.test
 __pycache__
 *.hbnb_storage.json
