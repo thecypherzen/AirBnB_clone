@@ -13,18 +13,23 @@ class User(BaseModel):
         first_name(:str): user's first name
         last_name(:str): user's lastname
     """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
+
     def __init__(self, *args, **kwargs):
         """Initializes the User class.
 
         Sets all attributes empty strings
         """
-        email = kwargs.pop("email", "")
-        password = kwargs.pop("password", "")
-        first_name = kwargs.pop("first_name", "")
-        last_name = kwargs.pop("last_name", "")
+        k_email = kwargs.pop("email", "")
+        k_password = kwargs.pop("password", "")
+        k_first_name = kwargs.pop("first_name", "")
+        k_last_name = kwargs.pop("last_name", "")
 
         super().__init__(**kwargs)
-        self.email = email
-        self.password = password
-        self.first_name = first_name
-        self.last_name = last_name
+        User.email = k_email
+        User.password = k_password
+        User.first_name = k_first_name
+        User.last_name = k_last_name
