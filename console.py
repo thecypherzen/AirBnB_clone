@@ -3,13 +3,16 @@
 This is a program that contains the entry point of the command interpreter
 """
 import cmd
-from models.base_model import BaseModel
+from os import system, name
+from models import amenity, base_model, city, place, review, state, user
 from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
     """ This is a class that defines the command interpreter """
     prompt = "(hbnb) "
+    classes = ["BaseModel", "Amenity", "City", "Place",
+               "Review", "State", "User"]
 
     def do_quit(self, line):
         """ Quit command to exit the program """
@@ -21,62 +24,93 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """ This function is called when the user\
-            passes and emptyline to the console """
+        """
+            This function is called when the user\
+            passes and emptyline to the console
+        """
         pass
 
     def do_create(self, line):
-        """ Creates a new instance of BaseModel,\
+        """
+            Creates a new instance of the specified class,\
             saves it (to the JSON file) and prints the id.
-            Ex: $ create BaseModel """
+            Ex: $ create BaseModel
+        """
         if line == "":
             print("** class name missing **")
-        elif line != "BaseModel":
+            return
+        if line not in self.classes:
             print("** class doesn't exist **")
-        else:
-            basemodel = BaseModel()
+            return
+        self.create_the_model(line)
+
+    def create_the_model(self, line):
+        """
+            Creates an object based on the class specified by the user
+        """
+        if (line == "BaseModel"):
+            basemodel = base_model.BaseModel()
             basemodel.save()
             print(basemodel.id)
+        elif (line == "Amenity"):
+            Amenity = amenity.Amenity()
+            Amenity.save()
+            print(Amenity.id)
+        elif (line == "City"):
+            City = city.City()
+            City.save()
+            print(City.id)
+        elif (line == "Place"):
+            Place = place.Place()
+            Place.save()
+            print(Place.id)
+        elif (line == "Review"):
+            Review = review.Review()
+            Review.save()
+            print(Review.id)
+        elif (line == "State"):
+            State = state.State()
+            State.save()
+            print(State.id)
+        elif (line == "User"):
+            User = user.User()
+            User.save()
+            print(User.id)
 
     def do_show(self, line):
-        """ Prints the string representation of an instance\
+        """
+            Prints the string representation of an instance\
             based on the class name and id.
-            Ex: $ show BaseModel 1234-1234-1234 """
+            Ex: $ show BaseModel 1234-1234-1234
+        """
         input = line.split()
         keys_dict = self.get_objects()
-        if input == "":
+        if not input:
             print("** class name missing **")
-        elif len(input) != 2:
-            if input in keys_dict.values():
-                print("** instance id missing **")
-            else:
-                print("** class doesn't exist **")
-        else:
-            if :
-                print(the instance)
-            else:
-                print("** no instance found **")
-        print(test)
-        # file_storage = FileStorage()
-        # file_storage.reload()
-        # all_objs = file_storage.all()
-        # print(all_objs[input])
-        # print("--")
-        # print(all_objs)
-        # keys = []
-        # for key in all_objs.keys():
-        #     keys = key
-        #     print("** class name missing **")
-        # if input[1] != "BaseModel":
-        #     print("** class doesn't exist **")
-        # print(input)
+            return
+        if input[0] in self.classes and len(input) == 1:
+            print("** instance id missing **")
+            return
+        if input[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if input[1] not in keys_dict.keys() or\
+                input[0] != keys_dict[input[1]]:
+            print("** no instance found **")
+            return
+        file_storage = FileStorage()
+        file_storage.reload()
+        all_objs = file_storage.all()
+        print(all_objs[".".join(input)])
 
     def get_objects(self):
-        """ This is a method that gets all the objects\
+        """
+            This is a method that gets all the objects\
             that are currently in the storage.
             Return:
                 A dictionary of the names\
-                and ids of objects in the memory. """
+                and ids of objects in the memory.
+        """
         file_storage = FileStorage()
         file_storage.reload()
         all_objs = file_storage.all()
@@ -90,23 +124,97 @@ class HBNBCommand(cmd.Cmd):
         return keys_dict
 
     def do_destroy(self, line):
-        """ Deletes an instance based on the class name and id\
+        """
+            Deletes an instance based on the class name and id\
             (save the change into the JSON file)
-            Ex: $ destroy BaseModel 1234-1234-1234 """
-        pass
+            Ex: $ destroy BaseModel 1234-1234-1234
+        """
+        input = line.split()
+        keys_dict = self.get_objects()
+        if not input:
+            print("** class name missing **")
+            return
+        if input[0] in self.classes and len(input) == 1:
+            print("** instance id missing **")
+            return
+        if input[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if input[1] not in keys_dict.keys() or\
+                input[0] != keys_dict[input[1]]:
+            print("** no instance found **")
+            return
+        file_storage = FileStorage()
+        file_storage.reload()
+        all_objs = file_storage.all()
+        del all_objs[".".join(input)]
+        file_storage.save()
 
     def do_all(self, line):
-        """ Prints all string representation of all instance\
+        """
+            Prints all string representation of all instance\
             based or not on the class name.
-            Ex: $ all BaseModel or $ all """
-        pass
+            Ex: $ all BaseModel or $ all
+        """
+        if line:
+            if line not in self.classes:
+                print("** class doesn't exist **")
+            else:
+                file_storage = FileStorage()
+                file_storage.reload()
+                all_objs = file_storage.all()
+                for key in all_objs.keys():
+                    key_list = key.split(".")
+                    if key_list[0] == line:
+                        print(f'["{all_objs[key]}"]')
+                    else:
+                        continue
+        else:
+            file_storage = FileStorage()
+            file_storage.reload()
+            all_objs = file_storage.all()
+            for key in all_objs.keys():
+                print(all_objs[key])
 
     def do_update(self, line):
-        """ Updates an instance based on the class name and id by\
+        """
+            Updates an instance based on the class name and id by\
             adding or updating attribute,\
             (save the change into the JSON file).
-            Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com' """
-        pass
+            Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com'
+        """
+        input = line.split()
+        input_len = len(input)
+        keys_dict = self.get_objects()
+        if not input:
+            print("** class name missing **")
+            return
+        if input[0] in self.classes and input_len == 1:
+            print("** instance id missing **")
+            return
+        if input[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if input[1] not in keys_dict.keys() or \
+                input[0] != keys_dict[input[1]]:
+            print("** no instance found **")
+            return
+        if input_len == 2:
+            print("** attribute name missing **")
+            return
+        if input_len == 3:
+            print("** value missing **")
+            return
+        key = input[0] + '.' + input[1]
+        fs = FileStorage()
+        fs.reload()
+        all_objs = fs.all()
+        setattr(all_objs[key], input[2], input[3])
+        fs.save()
+
+    def do_clear(self, line):
+        """ Clears the screen of the console """
+        system('cls' if name == 'nt' else 'clear')
 
 
 if __name__ == '__main__':
