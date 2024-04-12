@@ -3,6 +3,7 @@
 This is a program that contains the entry point of the command interpreter
 """
 import cmd
+from os import system, name
 from models import amenity, base_model, city, place, review, state, user
 from models.engine.file_storage import FileStorage
 
@@ -86,19 +87,21 @@ class HBNBCommand(cmd.Cmd):
         keys_dict = self.get_objects()
         if not input:
             print("** class name missing **")
-        else:
-            if input[0] in self.classes and len(input) == 1:
-                print("** instance id missing **")
-            elif input[0] not in self.classes:
-                print("** class doesn't exist **")
-            else:
-                if input[1] not in keys_dict.keys():
-                    print("** no instance found **")
-                else:
-                    file_storage = FileStorage()
-                    file_storage.reload()
-                    all_objs = file_storage.all()
-                    print(all_objs[".".join(input)])
+            return
+        if input[0] in self.classes and len(input) == 1:
+            print("** instance id missing **")
+            return
+        if input[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if input[1] not in keys_dict.keys() or\
+                input[0] != keys_dict[input[1]]:
+            print("** no instance found **")
+            return
+        file_storage = FileStorage()
+        file_storage.reload()
+        all_objs = file_storage.all()
+        print(all_objs[".".join(input)])
 
     def get_objects(self):
         """
@@ -130,20 +133,22 @@ class HBNBCommand(cmd.Cmd):
         keys_dict = self.get_objects()
         if not input:
             print("** class name missing **")
-        else:
-            if input[0] in self.classes and len(input) == 1:
-                print("** instance id missing **")
-            elif input[0] not in self.classes:
-                print("** class doesn't exist **")
-            else:
-                if input[1] not in keys_dict.keys():
-                    print("** no instance found **")
-                else:
-                    file_storage = FileStorage()
-                    file_storage.reload()
-                    all_objs = file_storage.all()
-                    del all_objs[".".join(input)]
-                    file_storage.save()
+            return
+        if input[0] in self.classes and len(input) == 1:
+            print("** instance id missing **")
+            return
+        if input[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if input[1] not in keys_dict.keys() or\
+                input[0] != keys_dict[input[1]]:
+            print("** no instance found **")
+            return
+        file_storage = FileStorage()
+        file_storage.reload()
+        all_objs = file_storage.all()
+        del all_objs[".".join(input)]
+        file_storage.save()
 
     def do_all(self, line):
         """
@@ -191,7 +196,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         if input[1] not in keys_dict.keys() or \
-                keys_dict[input[1]] != input[0]:
+                input[0] != keys_dict[input[1]]:
             print("** no instance found **")
             return
         if input_len == 2:
@@ -206,6 +211,10 @@ class HBNBCommand(cmd.Cmd):
         all_objs = fs.all()
         setattr(all_objs[key], input[2], input[3])
         fs.save()
+
+    def do_clear(self, line):
+        """ Clears the screen of the console """
+        system('cls' if name == 'nt' else 'clear')
 
 
 if __name__ == '__main__':
