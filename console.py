@@ -37,10 +37,11 @@ class HBNBCommand(cmd.Cmd):
         """
         if line == "":
             print("** class name missing **")
-        elif line not in self.classes:
+            return
+        if line not in self.classes:
             print("** class doesn't exist **")
-        else:
-            self.create_the_model(line)
+            return
+        self.create_the_model(line)
 
     def create_the_model(self, line):
         """
@@ -76,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
             print(User.id)
 
     def do_show(self, line):
-        """ 
+        """
             Prints the string representation of an instance\
             based on the class name and id.
             Ex: $ show BaseModel 1234-1234-1234
@@ -160,7 +161,7 @@ class HBNBCommand(cmd.Cmd):
                 for key in all_objs.keys():
                     key_list = key.split(".")
                     if key_list[0] == line:
-                        print(all_objs[key])
+                        print(f'["{all_objs[key]}"]')
                     else:
                         continue
         else:
@@ -171,12 +172,40 @@ class HBNBCommand(cmd.Cmd):
                 print(all_objs[key])
 
     def do_update(self, line):
-        """ 
+        """
             Updates an instance based on the class name and id by\
             adding or updating attribute,\
             (save the change into the JSON file).
-            Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com' """
-        pass
+            Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com'
+        """
+        input = line.split()
+        input_len = len(input)
+        keys_dict = self.get_objects()
+        if not input:
+            print("** class name missing **")
+            return
+        if input[0] in self.classes and input_len == 1:
+            print("** instance id missing **")
+            return
+        if input[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if input[1] not in keys_dict.keys() or \
+                keys_dict[input[1]] != input[0]:
+            print("** no instance found **")
+            return
+        if input_len == 2:
+            print("** attribute name missing **")
+            return
+        if input_len == 3:
+            print("** value missing **")
+            return
+        key = input[0] + '.' + input[1]
+        fs = FileStorage()
+        fs.reload()
+        all_objs = fs.all()
+        setattr(all_objs[key], input[2], input[3])
+        fs.save()
 
 
 if __name__ == '__main__':
