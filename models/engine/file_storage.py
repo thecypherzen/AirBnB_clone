@@ -1,6 +1,6 @@
 """A module where file storage class is defined
 """
-from copy import deepcopy
+
 import os
 import json
 import sys
@@ -77,7 +77,8 @@ class FileStorage:
         Returns:
                 None
         """
-        __objects_copy = deepcopy(self.__objects)
+        print("storage: ", self.__objects)
+        __objects_copy = self.__objects.copy()
         for key, obj in __objects_copy.items():
             __objects_copy[key] = obj.to_dict()
 

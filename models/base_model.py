@@ -82,6 +82,7 @@ class BaseModel:
         """Updates class' 'updated_at' to current datetime"""
 
         self.updated_at = dt.now()
+        storage.new(self)
         storage.save()
 
     def to_dict(self):
@@ -97,13 +98,9 @@ class BaseModel:
                         to ISO format: %Y-%m-%dT%H:%M:%S.%f \
                         (ex: 2017-06-14T22:31:03.285259)
         """
-        from copy import deepcopy
         # update timestamp values
-        obj_copy = deepcopy(self)
-        obj_copy.created_at = obj_copy.created_at.isoformat()
-        obj_copy.updated_at = obj_copy.updated_at.isoformat()
-
-        # get dictionary
-        temp = obj_copy.__dict__
-        temp['__class__'] = self.__class__.__name__
-        return temp
+        obj_copy = self.__dict__.copy()
+        obj_copy["created_at"] = obj_copy["created_at"].isoformat()
+        obj_copy["updated_at"] = obj_copy["updated_at"].isoformat()
+        obj_copy['__class__'] = self.__class__.__name__
+        return obj_copy
