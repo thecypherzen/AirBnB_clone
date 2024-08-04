@@ -62,11 +62,9 @@ class HBNBCommand(cmd.Cmd):
             (save the change into the JSON file)
             Ex: $ destroy BaseModel 1234-1234-1234
         """
-        print(len(storage.all().values()))
         instance = self.do_check(line)
         if instance:
             storage.destroy(instance)
-        print(len(storage.all().values()))
 
     def do_all(self, line):
         """ Prints all string representation of all instance\
