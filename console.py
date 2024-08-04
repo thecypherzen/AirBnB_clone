@@ -11,6 +11,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from os import system
 
 
 class HBNBCommand(cmd.Cmd):
@@ -89,43 +90,33 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """
-            Updates an instance based on the class name and id by\
-            adding or updating attribute,\
-            (save the change into the JSON file).
-            Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com'
+            Updates an instance based on the class name and id by
+            adding or updating attribute, and save the change into the
+            JSON file).
+            Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com
         """
+        instance = self.do_check(line)
+        if not instance:
+            return
         input = line.split()
         input_len = len(input)
-        keys_dict = self.get_objects()
-        if not input:
-            print("** class name missing **")
+        if input_len < 4:
+            if input_len == 2:
+                print("** attribute name missing **")
+            else:
+                print("** value missing **")
             return
-        if input[0] in self.__classes and input_len == 1:
-            print("** instance id missing **")
-            return
-        if input[0] not in self.__classes:
-            print("** class doesn't exist **")
-            return
-        if input[1] not in keys_dict.keys() or \
-                input[0] != keys_dict[input[1]]:
-            print("** no instance found **")
-            return
-        if input_len == 2:
-            print("** attribute name missing **")
-            return
-        if input_len == 3:
-            print("** value missing **")
-            return
-        key = input[0] + '.' + input[1]
-        fs = FileStorage()
-        fs.reload()
-        all_objs = fs.all()
-        setattr(all_objs[key], input[2], input[3])
-        fs.save()
+        if input[2] not in ["id", "created_at", "updated_at"]:
+            if input[3][0] == input[3][-1] == '"':
+                value = input[3][1:-1]
+            else:
+                value = input[3]
+            setattr(instance, input[2], value)
+            instance.save()
 
     def do_clear(self, line):
         """ Clears the screen of the console """
-        system('cls' if name == 'nt' else 'clear')
+        system('clear')
 
     def do_check(self, line):
         """checks if class_name exists or obj_id matches for instance"""
