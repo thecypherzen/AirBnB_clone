@@ -69,31 +69,23 @@ class HBNBCommand(cmd.Cmd):
             storage.destroy(instance)
             storage.save()
 
-    def do_all(self, line):
+    def do_all(self, model_name):
         """
             Prints all string representation of all instance\
             based or not on the class name.
             Ex: $ all BaseModel or $ all
         """
-        if line:
-            if line not in self.__classes:
+        if model_name:
+            if model_name not in self.__classes:
                 print("** class doesn't exist **")
+                return
             else:
-                file_storage = FileStorage()
-                file_storage.reload()
-                all_objs = file_storage.all()
-                for key in all_objs.keys():
-                    key_list = key.split(".")
-                    if key_list[0] == line:
-                        print(f'["{all_objs[key]}"]')
-                    else:
-                        continue
+                all_models = storage.all(model_name)
         else:
-            file_storage = FileStorage()
-            file_storage.reload()
-            all_objs = file_storage.all()
-            for key in all_objs.keys():
-                print(all_objs[key])
+            all_models = storage.all()
+        models_list = [str(model) for model in all_models.values()]
+        print(models_list)
+
 
     def do_update(self, line):
         """
