@@ -138,21 +138,21 @@ class HBNBCommand(cmd.Cmd):
         """checks if class_name exists or obj_id matches for instance"""
         instance = None
         input = line.split()
-        if len(input) == 0:
+        arg_len = len(input)
+        if arg_len == 0:
             print("** class name missing **")
-        elif len(input) == 1:
+        elif input[0] not in self.__classes:
+            print("** class doesn't exist **")
+        elif arg_len == 1:
             print("** instance id missing **")
         else:
             all_objs = storage.all().values()
-            if input[0] not in [obj.__class__.__name__ for obj in all_objs]:
-                print("** class doesn't exist **")
-            else:
-                for obj in all_objs:
-                    if obj.id == input[1]:
-                        instance = obj
-                        break
-                if instance is None:
-                    print("** no instance found **")
+            for obj in all_objs:
+                if obj.id == input[1]:
+                    instance = obj
+                    break
+            if instance is None:
+                print("** no instance found **")
         return instance
 
 
