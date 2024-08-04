@@ -59,10 +59,14 @@ class HBNBCommand(cmd.Cmd):
 
 
     def do_destroy(self, line):
-        """ Deletes an instance based on the class name and id\
+        """ Deletes an instance based on the class name and id
             (save the change into the JSON file)
-            Ex: $ destroy BaseModel 1234-1234-1234 """
-        
+            Ex: $ destroy BaseModel 1234-1234-1234
+        """
+        instance = self.do_check(line)
+        if instance:
+            storage.delete(instance)
+
 
     def do_all(self, line):
         """ Prints all string representation of all instance\
