@@ -50,7 +50,6 @@ class HBNBCommand(cmd.Cmd):
             new_obj.save()
             print(new_obj.id)
 
-
     def do_show(self, line):
         """
             Prints the string representation of an instance\
@@ -86,7 +85,6 @@ class HBNBCommand(cmd.Cmd):
             all_models = storage.all()
         models_list = [str(model) for model in all_models.values()]
         print(models_list)
-
 
     def do_update(self, line):
         """
