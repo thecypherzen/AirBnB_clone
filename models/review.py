@@ -12,16 +12,10 @@ class Review(BaseModel):
         user_id(:str): user's name. Inits empty
         text(:str): review text. Inits to empty
     """
+    place_id = ""
+    user_id = ""
+    text = ""
+
     def __init__(self, *args, **kwargs):
-        """Initializes the Review class.
-
-        Sets all attributes empty strings
-        """
-        place_id = kwargs.pop("place_id", "")
-        user_id = kwargs.pop("user_id", "")
-        text = kwargs.pop("text", "")
-
+        """Initializes the Review class."""
         super().__init__(**kwargs)
-        self.place_id = place_id
-        self.user_id = user_id
-        self.text = text
