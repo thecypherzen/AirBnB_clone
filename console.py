@@ -139,6 +139,19 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
         return instance
 
+    def default(self, line):
+        """Gets all instances of model by model_name"""
+        if line[-2] == "(" and line[-1] == ")":
+            input = line.split(".")
+            if input[1] == "all()":
+                if input[0] not in self.__classes:
+                    print("** class doesn't exist **")
+                    return
+                objects = storage.all(input[0])
+                print([str(obj) for obj in objects.values()])
+        else:
+            print(f"*** Unknown syntax: {line}")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
