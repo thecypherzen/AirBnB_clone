@@ -8,13 +8,10 @@ class State(BaseModel):
     """Defines a State
 
     Attributes:
-        name(:str): name of state
+        name(:str:publc): name of state
     """
-    def __init__(self, *args, **kwargs):
-        """Initializes the State class.
+    name = ""
 
-        Sets name to empty string at initialization
-        """
-        name = kwargs.pop("name", "")
+    def __init__(self, *args, **kwargs):
+        """Initializes the State class. """
         super().__init__(**kwargs)
-        self.name = name
