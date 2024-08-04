@@ -53,18 +53,16 @@ class HBNBCommand(cmd.Cmd):
         """ Prints the string representation of an instance\
             based on the class name and id.
             Ex: $ show BaseModel 1234-1234-1234 """
-        input = line.split()
         instance = self.do_check(line)
         if instance:
             print(instance)
-
 
 
     def do_destroy(self, line):
         """ Deletes an instance based on the class name and id\
             (save the change into the JSON file)
             Ex: $ destroy BaseModel 1234-1234-1234 """
-        pass
+        
 
     def do_all(self, line):
         """ Prints all string representation of all instance\
