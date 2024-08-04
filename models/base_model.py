@@ -7,7 +7,7 @@ Classes:
 """
 from datetime import datetime as dt, timedelta as td
 from uuid import uuid4 as idgen
-from models import storage
+import models
 
 
 class BaseModel:
@@ -61,12 +61,12 @@ class BaseModel:
                 if key not in to_skip:
                     setattr(self, key, kwargs[key])
             if "id" not in kwargs.keys():
-                storage.new(self)
+                f_storage.new(self)
         else:
             self.id = str(idgen())
             self.created_at = dt.now()
             self.updated_at = self.created_at
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """Creates a string of the class object
@@ -82,8 +82,7 @@ class BaseModel:
         """Updates class' 'updated_at' to current datetime"""
 
         self.updated_at = dt.now()
-        storage.new(self)
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary of class's __dict__

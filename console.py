@@ -3,9 +3,18 @@
 This is a program that contains the entry point of the command interpreter
 """
 import cmd
-from os import system, name
-from models import amenity, base_model, city, place, review, state, user
-from models.engine.file_storage import FileStorage
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models import storage
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+
+classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+           "Place": City, "Review": Review, "State": State,
+           "User": User}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -34,8 +43,8 @@ class HBNBCommand(cmd.Cmd):
         """
             Creates a new instance of the specified class,\
             saves it (to the JSON file) and prints the id.
-            Ex: $ create BaseModel
-        """
+            Ex: $ create BaseModel """
+        print(line)
         if line == "":
             print("** class name missing **")
             return
@@ -81,74 +90,19 @@ class HBNBCommand(cmd.Cmd):
         """
             Prints the string representation of an instance\
             based on the class name and id.
-            Ex: $ show BaseModel 1234-1234-1234
-        """
-        input = line.split()
-        keys_dict = self.get_objects()
-        if not input:
-            print("** class name missing **")
-            return
-        if input[0] in self.classes and len(input) == 1:
-            print("** instance id missing **")
-            return
-        if input[0] not in self.classes:
-            print("** class doesn't exist **")
-            return
-        if input[1] not in keys_dict.keys() or\
-                input[0] != keys_dict[input[1]]:
-            print("** no instance found **")
-            return
-        file_storage = FileStorage()
-        file_storage.reload()
-        all_objs = file_storage.all()
-        print(all_objs[".".join(input)])
-
-    def get_objects(self):
-        """
-            This is a method that gets all the objects\
-            that are currently in the storage.
-            Return:
-                A dictionary of the names\
-                and ids of objects in the memory.
-        """
-        file_storage = FileStorage()
-        file_storage.reload()
-        all_objs = file_storage.all()
-        keys = []
-        for key in all_objs.keys():
-            keys.append(key)
-        keys_dict = {}
-        for item in keys:
-            key_value = item.split(".")
-            keys_dict[key_value[1]] = key_value[0]
-        return keys_dict
+            Ex: $ show BaseModel 1234-1234-1234 """
+        instance = self.do_check(line)
+        if instance:
+            print(instance)
 
     def do_destroy(self, line):
-        """
-            Deletes an instance based on the class name and id\
+        """ Deletes an instance based on the class name and id
             (save the change into the JSON file)
             Ex: $ destroy BaseModel 1234-1234-1234
         """
-        input = line.split()
-        keys_dict = self.get_objects()
-        if not input:
-            print("** class name missing **")
-            return
-        if input[0] in self.classes and len(input) == 1:
-            print("** instance id missing **")
-            return
-        if input[0] not in self.classes:
-            print("** class doesn't exist **")
-            return
-        if input[1] not in keys_dict.keys() or\
-                input[0] != keys_dict[input[1]]:
-            print("** no instance found **")
-            return
-        file_storage = FileStorage()
-        file_storage.reload()
-        all_objs = file_storage.all()
-        del all_objs[".".join(input)]
-        file_storage.save()
+        instance = self.do_check(line)
+        if instance:
+            storage.destroy(instance)
 
     def do_all(self, line):
         """
@@ -215,6 +169,27 @@ class HBNBCommand(cmd.Cmd):
     def do_clear(self, line):
         """ Clears the screen of the console """
         system('cls' if name == 'nt' else 'clear')
+
+    def do_check(self, line):
+        """checks if class_name exists or obj_id matches for instance"""
+        instance = None
+        input = line.split()
+        if len(input) == 0:
+            print("** class name missing **")
+        elif len(input) == 1:
+            print("** instance id missing **")
+        else:
+            all_objs = storage.all().values()
+            if input[0] not in [obj.__class__.__name__ for obj in all_objs]:
+                print("** class doesn't exist **")
+            else:
+                for obj in all_objs:
+                    if obj.id == input[1]:
+                        instance = obj
+                        break
+                if instance is None:
+                    print("** no instance found **")
+        return instance
 
 
 if __name__ == '__main__':
