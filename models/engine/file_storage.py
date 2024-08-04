@@ -84,7 +84,6 @@ class FileStorage:
         Returns:
                 None
         """
-        print("storage: ", self.__objects)
         __objects_copy = self.__objects.copy()
         for key, obj in __objects_copy.items():
             __objects_copy[key] = obj.to_dict()
