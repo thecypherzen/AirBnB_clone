@@ -54,24 +54,9 @@ class HBNBCommand(cmd.Cmd):
             based on the class name and id.
             Ex: $ show BaseModel 1234-1234-1234 """
         input = line.split()
-        instance = None
-        if input == "":
-            print("** class name missing **")
-        elif len(input) < 2:
-            print("** instance id missing **")
-        else:
-            all_objs = storage.all().values()
-            if input[0] not in [obj.__class__.__name__ for obj in all_objs]:
-                print("** class doesn't exist **")
-            else:
-                for obj in all_objs:
-                    if obj.id == input[1]:
-                        instance = obj
-                        break
-                if instance is None:
-                    print("** no instance found **")
-                else:
-                    print(instance)
+        instance = self.do_check(line)
+        if instance:
+            print(instance)
 
 
 
@@ -93,6 +78,27 @@ class HBNBCommand(cmd.Cmd):
             (save the change into the JSON file).
             Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com' """
         pass
+
+    def do_check(self, line):
+        """checks if class_name exists or obj_id matches for instance"""
+        instance = None
+        input = line.split()
+        if input == "":
+            print("** class name missing **")
+        elif len(input) < 2:
+            print("** instance id missing **")
+        else:
+            all_objs = storage.all().values()
+            if input[0] not in [obj.__class__.__name__ for obj in all_objs]:
+                print("** class doesn't exist **")
+            else:
+                for obj in all_objs:
+                    if obj.id == input[1]:
+                        instance = obj
+                        break
+                if instance is None:
+                    print("** no instance found **")
+        return instance
 
 
 if __name__ == '__main__':
