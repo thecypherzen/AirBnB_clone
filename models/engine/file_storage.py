@@ -33,7 +33,7 @@ class FileStorage:
 
     """
     folder = os.path.dirname(os.path.abspath(__file__))
-    __classes = {"BaseModel": BaseModel}
+    __classes = {"BaseModel": BaseModel, "User": User}
     __file_path = f"{folder}/.hbnb_storage.json"
     __objects = {}
 
@@ -91,8 +91,8 @@ class FileStorage:
         Returns:
                 None
         """
-        __objects_copy = self.__objects.copy()
-        for key, obj in __objects_copy.items():
+        __objects_copy = {}
+        for key, obj in self.__objects.items():
             __objects_copy[key] = obj.to_dict()
 
         with open(self.__file_path, 'w') as file:
