@@ -43,7 +43,7 @@ class FileStorage:
         """Class method that returns all objects in the FileStorage class"""
         return self.__objects
 
-    def destroy(self, obj_key)
+    def destroy(self, obj_key):
         """ deletes an object from storage objects """
         del __objects[obj_key]
 
