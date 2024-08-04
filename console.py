@@ -67,6 +67,7 @@ class HBNBCommand(cmd.Cmd):
         instance = self.do_check(line)
         if instance:
             storage.destroy(instance)
+            storage.save()
 
     def do_all(self, line):
         """
