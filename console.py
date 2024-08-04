@@ -12,16 +12,11 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
-classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": City, "Review": Review, "State": State,
-           "User": User}
-
 
 class HBNBCommand(cmd.Cmd):
     """ This is a class that defines the command interpreter """
     prompt = "(hbnb) "
-    classes = ["BaseModel", "Amenity", "City", "Place",
-               "Review", "State", "User"]
+    __classes = {"BaseModel": BaseModel}
 
     def do_quit(self, line):
         """ Quit command to exit the program """
@@ -41,50 +36,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """
-            Creates a new instance of the specified class,\
+            Creates a new instance of BaseModel and
             saves it (to the JSON file) and prints the id.
-            Ex: $ create BaseModel """
-        print(line)
+            Ex: $ create BaseModel
+        """
         if line == "":
             print("** class name missing **")
-            return
-        if line not in self.classes:
+        elif line not in self.__classes:
             print("** class doesn't exist **")
-            return
-        self.create_the_model(line)
+        else:
+            new_obj = self.__classes[line]()
+            new_obj.save()
+            print(new_obj.id)
 
-    def create_the_model(self, line):
-        """
-            Creates an object based on the class specified by the user
-        """
-        if (line == "BaseModel"):
-            basemodel = base_model.BaseModel()
-            basemodel.save()
-            print(basemodel.id)
-        elif (line == "Amenity"):
-            Amenity = amenity.Amenity()
-            Amenity.save()
-            print(Amenity.id)
-        elif (line == "City"):
-            City = city.City()
-            City.save()
-            print(City.id)
-        elif (line == "Place"):
-            Place = place.Place()
-            Place.save()
-            print(Place.id)
-        elif (line == "Review"):
-            Review = review.Review()
-            Review.save()
-            print(Review.id)
-        elif (line == "State"):
-            State = state.State()
-            State.save()
-            print(State.id)
-        elif (line == "User"):
-            User = user.User()
-            User.save()
-            print(User.id)
 
     def do_show(self, line):
         """
@@ -111,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
             Ex: $ all BaseModel or $ all
         """
         if line:
-            if line not in self.classes:
+            if line not in self.__classes:
                 print("** class doesn't exist **")
             else:
                 file_storage = FileStorage()
@@ -143,10 +107,10 @@ class HBNBCommand(cmd.Cmd):
         if not input:
             print("** class name missing **")
             return
-        if input[0] in self.classes and input_len == 1:
+        if input[0] in self.__classes and input_len == 1:
             print("** instance id missing **")
             return
-        if input[0] not in self.classes:
+        if input[0] not in self.__classes:
             print("** class doesn't exist **")
             return
         if input[1] not in keys_dict.keys() or \
