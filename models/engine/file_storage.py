@@ -42,8 +42,7 @@ class FileStorage:
         class_obj or all objects in FileStorage if class_obj is None
         """
         if not class_name:
-            all_objs = self.__objects.copy()
-            return all_objs
+            return self.__objects()
         all_objs = {}
         for key, obj in self.__objects.items():
             if obj.__class__.__name__ == class_name:
