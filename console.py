@@ -11,17 +11,13 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-
-classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": City, "Review": Review, "State": State,
-           "User": User}
+from os import system
 
 
 class HBNBCommand(cmd.Cmd):
     """ This is a class that defines the command interpreter """
     prompt = "(hbnb) "
-    classes = ["BaseModel", "Amenity", "City", "Place",
-               "Review", "State", "User"]
+    __classes = {"BaseModel": BaseModel}
 
     def do_quit(self, line):
         """ Quit command to exit the program """
@@ -41,50 +37,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """
-            Creates a new instance of the specified class,\
+            Creates a new instance of BaseModel and
             saves it (to the JSON file) and prints the id.
-            Ex: $ create BaseModel """
-        print(line)
+            Ex: $ create BaseModel
+        """
         if line == "":
             print("** class name missing **")
-            return
-        if line not in self.classes:
+        elif line not in self.__classes:
             print("** class doesn't exist **")
-            return
-        self.create_the_model(line)
+        else:
+            new_obj = self.__classes[line]()
+            new_obj.save()
+            print(new_obj.id)
 
-    def create_the_model(self, line):
-        """
-            Creates an object based on the class specified by the user
-        """
-        if (line == "BaseModel"):
-            basemodel = base_model.BaseModel()
-            basemodel.save()
-            print(basemodel.id)
-        elif (line == "Amenity"):
-            Amenity = amenity.Amenity()
-            Amenity.save()
-            print(Amenity.id)
-        elif (line == "City"):
-            City = city.City()
-            City.save()
-            print(City.id)
-        elif (line == "Place"):
-            Place = place.Place()
-            Place.save()
-            print(Place.id)
-        elif (line == "Review"):
-            Review = review.Review()
-            Review.save()
-            print(Review.id)
-        elif (line == "State"):
-            State = state.State()
-            State.save()
-            print(State.id)
-        elif (line == "User"):
-            User = user.User()
-            User.save()
-            print(User.id)
 
     def do_show(self, line):
         """
@@ -103,92 +68,75 @@ class HBNBCommand(cmd.Cmd):
         instance = self.do_check(line)
         if instance:
             storage.destroy(instance)
+            storage.save()
 
-    def do_all(self, line):
+    def do_all(self, model_name):
         """
             Prints all string representation of all instance\
             based or not on the class name.
             Ex: $ all BaseModel or $ all
         """
-        if line:
-            if line not in self.classes:
+        if model_name:
+            if model_name not in self.__classes:
                 print("** class doesn't exist **")
+                return
             else:
-                file_storage = FileStorage()
-                file_storage.reload()
-                all_objs = file_storage.all()
-                for key in all_objs.keys():
-                    key_list = key.split(".")
-                    if key_list[0] == line:
-                        print(f'["{all_objs[key]}"]')
-                    else:
-                        continue
+                all_models = storage.all(model_name)
         else:
-            file_storage = FileStorage()
-            file_storage.reload()
-            all_objs = file_storage.all()
-            for key in all_objs.keys():
-                print(all_objs[key])
+            all_models = storage.all()
+        models_list = [str(model) for model in all_models.values()]
+        print(models_list)
+
 
     def do_update(self, line):
         """
-            Updates an instance based on the class name and id by\
-            adding or updating attribute,\
-            (save the change into the JSON file).
-            Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com'
+            Updates an instance based on the class name and id by
+            adding or updating attribute, and save the change into the
+            JSON file).
+            Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com
         """
+        instance = self.do_check(line)
+        if not instance:
+            return
         input = line.split()
         input_len = len(input)
-        keys_dict = self.get_objects()
-        if not input:
-            print("** class name missing **")
+        if input_len < 4:
+            if input_len == 2:
+                print("** attribute name missing **")
+            else:
+                print("** value missing **")
             return
-        if input[0] in self.classes and input_len == 1:
-            print("** instance id missing **")
-            return
-        if input[0] not in self.classes:
-            print("** class doesn't exist **")
-            return
-        if input[1] not in keys_dict.keys() or \
-                input[0] != keys_dict[input[1]]:
-            print("** no instance found **")
-            return
-        if input_len == 2:
-            print("** attribute name missing **")
-            return
-        if input_len == 3:
-            print("** value missing **")
-            return
-        key = input[0] + '.' + input[1]
-        fs = FileStorage()
-        fs.reload()
-        all_objs = fs.all()
-        setattr(all_objs[key], input[2], input[3])
-        fs.save()
+        if input[2] not in ["id", "created_at", "updated_at"]:
+            if input[3][0] == input[3][-1] == '"':
+                value = input[3][1:-1]
+            else:
+                value = input[3]
+            setattr(instance, input[2], value)
+            instance.save()
 
     def do_clear(self, line):
         """ Clears the screen of the console """
-        system('cls' if name == 'nt' else 'clear')
+        system('clear')
 
     def do_check(self, line):
         """checks if class_name exists or obj_id matches for instance"""
         instance = None
         input = line.split()
-        if len(input) == 0:
+        arg_len = len(input)
+        if arg_len == 0:
             print("** class name missing **")
-        elif len(input) == 1:
+        elif input[0] not in self.__classes:
+            print("** class doesn't exist **")
+        elif arg_len == 1:
             print("** instance id missing **")
         else:
             all_objs = storage.all().values()
-            if input[0] not in [obj.__class__.__name__ for obj in all_objs]:
-                print("** class doesn't exist **")
-            else:
-                for obj in all_objs:
-                    if obj.id == input[1]:
-                        instance = obj
-                        break
-                if instance is None:
-                    print("** no instance found **")
+            for obj in all_objs:
+                if obj.id == input[1]:
+                    instance = obj
+                    break
+            if instance is None:
+                print("** no instance found **")
         return instance
 
 
