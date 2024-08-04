@@ -34,8 +34,8 @@ class FileStorage:
     """
     folder = os.path.dirname(os.path.abspath(__file__))
     __classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-                   "Place": City, "Review": Review, "State": State,
-                   "User": User}
+                 "Place": City, "Review": Review, "State": State,
+                 "User": User}
     __file_path = f"{folder}/.hbnb_storage.json"
     __objects = {}
 
@@ -43,9 +43,12 @@ class FileStorage:
         """Class method that returns all objects in the FileStorage class"""
         return self.__objects
 
-    def destroy(self, obj_key):
+    def destroy(self, obj):
         """ deletes an object from storage objects """
-        del __objects[obj_key]
+        for key in self.__objects:
+            if self.__objects[key] == obj:
+                del self.__objects[key]
+                break
 
     def new(self, obj):
         """Changes content of __objects dict
