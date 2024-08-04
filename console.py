@@ -57,16 +57,16 @@ class HBNBCommand(cmd.Cmd):
         if instance:
             print(instance)
 
-
     def do_destroy(self, line):
         """ Deletes an instance based on the class name and id
             (save the change into the JSON file)
             Ex: $ destroy BaseModel 1234-1234-1234
         """
+        print(len(storage.all().values()))
         instance = self.do_check(line)
         if instance:
-            storage.delete(instance)
-
+            storage.destroy(instance)
+        print(len(storage.all().values()))
 
     def do_all(self, line):
         """ Prints all string representation of all instance\
@@ -85,9 +85,9 @@ class HBNBCommand(cmd.Cmd):
         """checks if class_name exists or obj_id matches for instance"""
         instance = None
         input = line.split()
-        if input == "":
+        if len(input) == 0:
             print("** class name missing **")
-        elif len(input) < 2:
+        elif len(input) == 1:
             print("** instance id missing **")
         else:
             all_objs = storage.all().values()
