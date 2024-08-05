@@ -1,33 +1,22 @@
 # Overview #
 
-The **AirBnB clone - The console** project pushes further the introduction to the \
-back-end development and OOP.
-objectives are to understand the following:
-- Unittest
-- Python packages
-- Serialization/Deserialization
-- *args, **kwargs
-- datetime
+The **AirBnB clone - The console** is the starting point of building the first full web application - a clone of AirBnB. Here, we:<br/>
+- put in place a parent class (called BaseModel) to take care of the initialization, serialization and deserialization of your future instances
+- create a simple flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file
+- create all classes used for AirBnB (User, State, City, Place…) that inherit from BaseModel
+- create the first abstracted storage engine of the project: File storage
+- create all unittests to validate all our classes and storage engine, and
+- buid a console to interact with our our objects from the command line. The console will enable us to:
+  - create a new object (ex: a new User or a new Place)
+  - retrieve an object  or all objects from our storage (file or database)
+  - do operations on objects like count, compute, etc
+  - update attributes of an object
+  - destroy an object
 
 
-## Folder Details ###
-- **Date Created:** Mar 4 2024.
-- **Authors:**
-	- [William Inyam](https.//github.com/thecypherzen)
-	- [Valentine Nyibiam](https.//github.com/ValentineNyibiam)
-- **Project Timeline:**
-  - **Released:** Mar. 4, 2024 - 6am.
-  - **1st Deadline:** Mar 11, 2024 - 6am.
-  - **Duration:** 7 days.
-  - **Month** 5, **Week** 3.
 
-## Technologies ##
-- All files written using using python3 (version 3.8.5)
-- File types can be identified by their extensions
-- Code tested on Ubuntu 20.04 LTS.
-
-
-## General Use ##
+## Overview of the Console ##
+### How to Use ###
 1. Clone repository to your local machine
 2. `cd` into repository.
 ```
@@ -47,26 +36,26 @@ There are a variety of commands available within the console program.
 
 ### Commands ###
 | COMMAND | DESCRIPTON | USAGE  | EXAMPLE
-|---------|-------------|-------|----------|
+|---------|-----------------------|-----------------------|-----------------------------|
 | `create` | Creates new instance of a given class<br/><ul><li>prints `id` fo class if operation was successful</li><li>prints an error message on error</li></ul> | `create <class_name>` | `create User` |
 | `destroy` | Destroys an object by its `class` and `uuid`<br/></ul><li>prints nothin on success.</li><li>prints error message on failure</li></ul> | `destroy <class> <uuid>` | `delete User 0963d9b6-981c-488d-9c96-3c0208e39715` |
-| `show`  | Shows an object based on class and UUID<br/><ul><li>prints string representation of <class> instance matching <uuid></li><li>prints error message if no match is found</li></ul> | `show <class> <uuid>` | `destroy User 0963d9b6-981c-488d-9c96-3c0208e39715` |
-| `all` | Shows all instances of:</br/><ul><li> all objects of <class> in storage<li><li>all instances of all objects in storage</li></ul> | `all [<class>]` |`all User`<br/>`all` |
+| `show`  | Shows an object based on class and UUID<br/><ul><li>prints string representation of <class> instance matching <uuid></li><li>prints error message if no match is found</li></ul> | `show <class> <uuid>`<br/>Alternative Syntax:<br/>`<class>.show(<uuid>)` | `show User 0963d9b6-981c-488d-9c96-3c0208e39715`<br/>`User.show(0963d9b6-981c-488d-9c96-3c0208e3971)` |
+| `all` | Shows all instances of:</br/><ul><li> all objects of <class> in storage<li><li>all instances of all objects in storage</li></ul> | `all [<class>]`</br>Alternative Syntax:<br/>`<class>.all()` |`all User`<br/>`all`<br/>`User.all()` |
 | `update` | Updates existing attributes of an object based on its <class> and <uuid> | `update <class> <attr> <value>`<br/><ul><li>where `value` contains a space, it should be wrapped in quotes: `\' or \"` </li><li>prints nothing on success</li><li>prints error message if error occurs</li><li>can also be called on the <class> itself</li></ul> | `update User 61327bb5-1e2b-4b4e-9c47-ba6f0222bdb8 name Nameless`</br/>`User.update(61327bb5-1e2b-4b4e-9c47-ba6f0222bdb8, name Nameless)` |
 | `quit` | Exits the program<ul><li>`EOF` does the same</li></ul> | `quit` | `quit` |
 
-<br>
-<br>
-## Examples ##
-### Primary Command Syntax ###
+<br />
+<br />
+### Examples ###
+#### Main Commands Syntax ####
 
 ###### Example 0: Create an object
 Usage: create <class_name>
 ```
-(hbnb) create BaseModel
+(hbnb) create State
 ```
 ```
-(hbnb) create BaseModel
+(hbnb) create State
 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 (hbnb)
 ```
@@ -74,30 +63,30 @@ Usage: create <class_name>
 Usage: show <class_name> <_id>
 
 ```
-(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-[BaseModel] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959), 
+(hbnb) show State 3aa5babc-efb6-4041-bfe9-3cc9727588f8
+[State] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959), 
 'updated_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96971)}
-(hbnb)  
+(hbnb)
 ```
 ###### Example 2: Destroy an object
 Usage: destroy <class_name> <_id>
 ```
-(hbnb) destroy BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
+(hbnb) destroy State 3aa5babc-efb6-4041-bfe9-3cc9727588f8
+(hbnb) show State 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 ** no instance found **
-(hbnb)   
+(hbnb)
 ```
 ###### Example 3: Update an object
 Usage: update <class_name> <_id>
 ```
-(hbnb) update BaseModel b405fc64-9724-498f-b405-e4071c3d857f first_name "person"
-(hbnb) show BaseModel b405fc64-9724-498f-b405-e4071c3d857f
-[BaseModel] (b405fc64-9724-498f-b405-e4071c3d857f) {'id': 'b405fc64-9724-498f-b405-e4071c3d857f', 'created_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729889), 
+(hbnb) update User b405fc64-9724-498f-b405-e4071c3d857f first_name "person"
+(hbnb) show User b405fc64-9724-498f-b405-e4071c3d857f
+[User] (b405fc64-9724-498f-b405-e4071c3d857f) {'id': 'b405fc64-9724-498f-b405-e4071c3d857f', 'created_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729889), 
 'updated_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729907), 'first_name': 'person'}
 (hbnb)
 ```
-<h3>Alternative Syntax</h3>
 
+#### Alternative Commands Syntax ####
 ###### Example 0: Show all User objects
 Usage: <class_name>.all()
 ```
@@ -129,12 +118,73 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 (hbnb) User.all()
 (hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'name': 'Fred the Frog', 'age': 9, 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
 ```
-<br>
+<br/>
+
+## Folder Details ###
+- **Date Created:** Mar 4 2024.
+- **Authors:**
+	- [William Inyam](https.//github.com/thecypherzen)
+	- [Valentine Nyibiam](https.//github.com/ValentineNyibiam)
+- **Project Timeline:**
+  - **Released:** Mar. 4, 2024 - 6am.
+  - **1st Deadline:** Mar 11, 2024 - 6am.
+  - **Duration:** 7 days.
+  - **Month** 5, **Week** 3.
 
 
-## Files ###
+## File Tree ##
+AirBnB_clone<br/>
+├── AUTHORS</br/>
+├── README.md</br/>
+├── console.py</br/>
+├── genauthors.sh</br/>
+├── models</br/>
+│   ├── __init__.py</br/>
+│   ├── amenity.py</br/>
+│   ├── base_model.py</br/>
+│   ├── city.py</br/>
+│   ├── engine</br/>
+│   │   ├── .hbnb_storage.json</br/>
+│   │   ├── __init__.py</br/>
+│   │   │   ├── __init__.cpython-38.pyc</br/>
+│   │   │   └── file_storage.cpython-38.pyc</br/>
+│   │   └── file_storage.py</br/>
+│   ├── place.py</br/>
+│   ├── review.py</br/>
+│   ├── state.py</br/>
+│   └── user.py</br/>
+├── tests</br/>
+│   ├── __init__.py</br/>
+│   └── test_models</br/>
+│       ├── __init__.py</br/>
+│       ├── test_amenity.py</br/>
+│       ├── test_base_model.py</br/>
+│       ├── test_city.py</br/>
+│       ├── test_engine</br/>
+│       │   ├── __init__.py</br/>
+│       │   └── test_file_storage.py</br/>
+│       ├── test_place.py</br/>
+│       ├── test_review.py</br/>
+│       ├── test_state.py</br/>
+│       └── test_user.py</br/>
+└── web_static</br/>
+
+
+
+## Technologies ##
+- All files written using using python3 (version 3.8.5)
+- File types can be identified by their extensions
+- Code tested on Ubuntu 20.04 LTS.
+
+
+## Files###
 - *Here is a detailed list of all files in the repo and their description*.
 
-| SN | File | Description                                   |
-|----|------|-----------------------------------------------|
-| 1. | [](https://github.com/thecypherzen/alx-system_engineering/0-change_your_home_IP-devops/tree/main/0-change_your_home_IP) | A Bash script that configures an Ubuntu server with the below requirements:<ul><li>localhost resolves to 127.0.0.2</li><li>facebook.com resolves to 8.8.8.8.</li><li>Execute in consideration of [this](https://intranet.alxswe.com/rltoken/XSXhQPoDu3QecXs3j9XgPQ)</li></ul>|
+| SN | File            | Description                                        |
+|----|-----------------|----------------------------------------------------|
+| 1. | [console.py](https://github.com/thecypherzen/) | The HBNB command line interpreter program |
+| 2. | [genauthors.sh]() | A script that generates 'Authors File' for a repository. |
+| 3. | [AUTHORS]() | The repo authors' file. Contains info of all contributors to this repo. |
+| 4. | [models]() | Package of all modules that define object classes. |
+| 5. | [tests]() | Package of all modules that define unittests. |
+| 6. | [web_static]() | Folder containing all HBNB static files for the web |
