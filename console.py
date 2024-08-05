@@ -138,7 +138,6 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def _get_instance(self, obj_id, obj_name=None):
-        print(obj_id, obj_name)
         instance = None
         all_objs = storage.all(obj_name).values()
         for obj in all_objs:
@@ -176,6 +175,7 @@ class HBNBCommand(cmd.Cmd):
                         storage.destroy(instance)
                         storage.save()
                     elif input[1] == "update":
+                        # print(input)
                         if i_len == 3:
                             print("** attribute name missing **")
                         elif i_len == 4:
