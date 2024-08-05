@@ -47,11 +47,11 @@ There are a variety of commands available within the console program.
 
 ### Commands ###
 | COMMAND | DESCRIPTON | USAGE  | EXAMPLE
-|---------|-------------|-------|----------|
+|---------|-----------------------|-----------------------|-----------------------------|
 | `create` | Creates new instance of a given class<br/><ul><li>prints `id` fo class if operation was successful</li><li>prints an error message on error</li></ul> | `create <class_name>` | `create User` |
 | `destroy` | Destroys an object by its `class` and `uuid`<br/></ul><li>prints nothin on success.</li><li>prints error message on failure</li></ul> | `destroy <class> <uuid>` | `delete User 0963d9b6-981c-488d-9c96-3c0208e39715` |
-| `show`  | Shows an object based on class and UUID<br/><ul><li>prints string representation of <class> instance matching <uuid></li><li>prints error message if no match is found</li></ul> | `show <class> <uuid>` | `destroy User 0963d9b6-981c-488d-9c96-3c0208e39715` |
-| `all` | Shows all instances of:</br/><ul><li> all objects of <class> in storage<li><li>all instances of all objects in storage</li></ul> | `all [<class>]` |`all User`<br/>`all` |
+| `show`  | Shows an object based on class and UUID<br/><ul><li>prints string representation of <class> instance matching <uuid></li><li>prints error message if no match is found</li></ul> | `show <class> <uuid>`<br/>Alternative Syntax:<br/>`<class>.show(<uuid>)` | `show User 0963d9b6-981c-488d-9c96-3c0208e39715`<br/>`User.show(0963d9b6-981c-488d-9c96-3c0208e3971)` |
+| `all` | Shows all instances of:</br/><ul><li> all objects of <class> in storage<li><li>all instances of all objects in storage</li></ul> | `all [<class>]`</br>Alternative Syntax:<br/>`<class>.all()` |`all User`<br/>`all`<br/>`User.all()` |
 | `update` | Updates existing attributes of an object based on its <class> and <uuid> | `update <class> <attr> <value>`<br/><ul><li>where `value` contains a space, it should be wrapped in quotes: `\' or \"` </li><li>prints nothing on success</li><li>prints error message if error occurs</li><li>can also be called on the <class> itself</li></ul> | `update User 61327bb5-1e2b-4b4e-9c47-ba6f0222bdb8 name Nameless`</br/>`User.update(61327bb5-1e2b-4b4e-9c47-ba6f0222bdb8, name Nameless)` |
 | `quit` | Exits the program<ul><li>`EOF` does the same</li></ul> | `quit` | `quit` |
 
@@ -77,7 +77,7 @@ Usage: show <class_name> <_id>
 (hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 [BaseModel] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959), 
 'updated_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96971)}
-(hbnb)  
+(hbnb)
 ```
 ###### Example 2: Destroy an object
 Usage: destroy <class_name> <_id>
@@ -85,7 +85,7 @@ Usage: destroy <class_name> <_id>
 (hbnb) destroy BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 (hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 ** no instance found **
-(hbnb)   
+(hbnb)
 ```
 ###### Example 3: Update an object
 Usage: update <class_name> <_id>
