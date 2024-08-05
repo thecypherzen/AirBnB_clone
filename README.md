@@ -135,6 +135,11 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 ## Files ###
 - *Here is a detailed list of all files in the repo and their description*.
 
-| SN | File | Description                                   |
-|----|------|-----------------------------------------------|
-| 1. | [](https://github.com/thecypherzen/alx-system_engineering/0-change_your_home_IP-devops/tree/main/0-change_your_home_IP) | A Bash script that configures an Ubuntu server with the below requirements:<ul><li>localhost resolves to 127.0.0.2</li><li>facebook.com resolves to 8.8.8.8.</li><li>Execute in consideration of [this](https://intranet.alxswe.com/rltoken/XSXhQPoDu3QecXs3j9XgPQ)</li></ul>|
+| SN | File            | Description                                        |
+|----|-----------------|----------------------------------------------------|
+| 1. | [console.py](https://github.com/thecypherzen/) | The HBNB command line interpreter program |
+| 2. | [genauthors.sh]() | A script that generates 'Authors File' for a repository. |
+| 3. | [AUTHORS]() | The repo authors' file. Contains info of all contributors to this repo. |
+| 4. | [models]() | Package of all modules that define object classes. |
+| 5. | [tests]() | Package of all modules that define unittests. |
+| 6. | [web_static]() | Folder containing all HBNB static files for the web |
