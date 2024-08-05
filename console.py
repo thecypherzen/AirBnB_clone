@@ -12,6 +12,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from os import system
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -54,22 +55,27 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """
-            Prints the string representation of an instance\
+            Prints the string representation of an instance
             based on the class name and id.
-            Ex: $ show BaseModel 1234-1234-1234 """
-        instance = self.do_check(line)
-        if instance:
-            print(instance)
+            Ex: $ show BaseModel 1234-1234-1234
+        """
+        input_args = line.split(" ")
+        if self._validate(input_args):
+            instance = self._get_instance(input_args[1], input_args[0])
+            if instance:
+                print(instance)
 
     def do_destroy(self, line):
         """ Deletes an instance based on the class name and id
             (save the change into the JSON file)
             Ex: $ destroy BaseModel 1234-1234-1234
         """
-        instance = self.do_check(line)
-        if instance:
-            storage.destroy(instance)
-            storage.save()
+        input_args = line.split()
+        if self._validate(input_args):
+            instance = self._get_instance(input_args[1], input_args[0])
+            if instance:
+                storage.destroy(instance)
+                storage.save()
 
     def do_all(self, model_name):
         """
@@ -95,60 +101,75 @@ class HBNBCommand(cmd.Cmd):
             JSON file).
             Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com
         """
-        instance = self.do_check(line)
-        if not instance:
+        input_args = line.split()
+        if not self._validate(input_args):
             return
-        input = line.split()
-        input_len = len(input)
+        input_len = len(input_args)
         if input_len < 4:
             if input_len == 2:
                 print("** attribute name missing **")
             else:
                 print("** value missing **")
             return
-        if input[2] not in ["id", "created_at", "updated_at"]:
-            if input[3][0] == input[3][-1] == '"':
-                value = input[3][1:-1]
+        instance = self._get_instance(input_args[1], input_args[0])
+        if input_args[2] not in ["id", "created_at", "updated_at"]:
+            if input_args[3][0] == input_args[3][-1] == '"':
+                value = input_args[3][1:-1]
             else:
-                value = input[3]
-            setattr(instance, input[2], value)
+                value = input_args[3]
+            setattr(instance, input_args[2], value)
             instance.save()
 
     def do_clear(self, line):
         """ Clears the screen of the console """
         system('clear')
 
-    def do_check(self, line):
-        """checks if class_name exists or obj_id matches for instance"""
-        instance = None
-        input = line.split()
-        arg_len = len(input)
+    def _validate(self, input_args):
+        """checks if class_name exists and obj_id are passed"""
+        arg_len = len(input_args)
         if arg_len == 0:
             print("** class name missing **")
-        elif input[0] not in self.__classes:
+        elif input_args[0] not in self.__classes:
             print("** class doesn't exist **")
         elif arg_len == 1:
             print("** instance id missing **")
         else:
-            all_objs = storage.all().values()
-            for obj in all_objs:
-                if obj.id == input[1]:
-                    instance = obj
-                    break
-            if instance is None:
-                print("** no instance found **")
+            return True
+        return False
+
+    def _get_instance(self, obj_id, obj_name=None):
+        instance = None
+        all_objs = storage.all(obj_name).values()
+        for obj in all_objs:
+            if obj.id == obj_id:
+                instance = obj
+                break
+        if not instance:
+            print("** no instance found **")
         return instance
 
     def default(self, line):
         """Gets all instances of model by model_name"""
-        if line[-2] == "(" and line[-1] == ")":
-            input = line.split(".")
-            if input[1] == "all()":
-                if input[0] not in self.__classes:
-                    print("** class doesn't exist **")
+        regex = r'^[A-Za-z]+\.[a-z]+\(.*\)$'
+        match = re.search(regex, line)
+        if match:
+            regex = r'[\.\(\)]'
+            input = [val for val in re.split(regex, line) if val]
+            if input[0] not in self.__classes:
+                print("** class doesn't exist **")
+                return
+            if input[1] == "all":
+                self.do_all(input[0])
+            elif input[1] == "count":
+                print(len(storage.all(input[0]).values()))
+            else:
+                i_len = len(input)
+                if i_len < 3:
+                    print("** instance id missing **")
                     return
-                objects = storage.all(input[0])
-                print([str(obj) for obj in objects.values()])
+                if input[1] == "show":
+                    instance = self._get_instance(input[2], input[0])
+                    print(instance)
         else:
             print(f"*** Unknown syntax: {line}")
 
