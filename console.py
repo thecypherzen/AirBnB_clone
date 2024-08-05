@@ -155,6 +155,7 @@ class HBNBCommand(cmd.Cmd):
         if match:
             regex = r'[\.\(\)]'
             input = [val for val in re.split(regex, line) if val]
+            # print(input)
             if input[0] not in self.__classes:
                 print("** class doesn't exist **")
                 return
@@ -167,9 +168,13 @@ class HBNBCommand(cmd.Cmd):
                 if i_len < 3:
                     print("** instance id missing **")
                     return
-                if input[1] == "show":
-                    instance = self._get_instance(input[2], input[0])
-                    print(instance)
+                instance = self._get_instance(input[2], input[0])
+                if instance:
+                    if input[1] == "show":
+                        print(instance)
+                    elif input[1] == "destroy":
+                        storage.destroy(instance)
+                        storage.save()
         else:
             print(f"*** Unknown syntax: {line}")
 
