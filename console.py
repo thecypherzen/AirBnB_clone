@@ -2,6 +2,7 @@
 """
 This is a program that contains the entry point of the command interpreter
 """
+import ast
 import cmd
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -201,6 +202,15 @@ class HBNBCommand(cmd.Cmd):
                         if i_len == 3:
                             print("** attribute name missing **")
                             return
+                        # handle values passed as dict
+                        input[-1] = input[-1].strip()
+                        if input[-1][0] == "{" and input[-1][-1] == "}":
+                            value = ast.literal_eval(input[-1])
+                            for key, val in value.items():
+                                setattr(instance, key, val)
+                                instance.save()
+                            return
+                        # handle values passed normally
                         input = self._pop_next_arg(input)
                         i_len = len(input)
                         if i_len == 4:
