@@ -11,13 +11,11 @@ class City(BaseModel):
         state_id(:str): state's id
         name(:str): city name
     """
+    state_id = ""
+    name = ""
     def __init__(self, *args, **kwargs):
         """Initializes the City class.
 
         Sets all attributes empty strings
         """
-        state_id = kwargs.pop("state_id", "")
-        name = kwargs.pop("name", "")
         super().__init__(**kwargs)
-        self.state_id = state_id
-        self.name = name

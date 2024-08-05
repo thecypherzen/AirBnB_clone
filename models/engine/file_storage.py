@@ -33,7 +33,9 @@ class FileStorage:
 
     """
     folder = os.path.dirname(os.path.abspath(__file__))
-    __classes = {"BaseModel": BaseModel, "User": User}
+    __classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+                 "Place": Place, "Review": Review, "State": State,
+                 "User": User}
     __file_path = f"{folder}/.hbnb_storage.json"
     __objects = {}
 
