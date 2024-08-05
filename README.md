@@ -1,33 +1,22 @@
 # Overview #
 
-The **AirBnB clone - The console** project pushes further the introduction to the \
-back-end development and OOP.
-objectives are to understand the following:
-- Unittest
-- Python packages
-- Serialization/Deserialization
-- *args, **kwargs
-- datetime
+The **AirBnB clone - The console** is the starting point of building the first full web application - a clone of AirBnB. Here, we:<br/>
+- put in place a parent class (called BaseModel) to take care of the initialization, serialization and deserialization of your future instances
+- create a simple flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file
+- create all classes used for AirBnB (User, State, City, Place…) that inherit from BaseModel
+- create the first abstracted storage engine of the project: File storage
+- create all unittests to validate all our classes and storage engine, and
+- buid a console to interact with our our objects from the command line. The console will enable us to:
+  - create a new object (ex: a new User or a new Place)
+  - retrieve an object  or all objects from our storage (file or database)
+  - do operations on objects like count, compute, etc
+  - update attributes of an object
+  - destroy an object
 
 
-## Folder Details ###
-- **Date Created:** Mar 4 2024.
-- **Authors:**
-	- [William Inyam](https.//github.com/thecypherzen)
-	- [Valentine Nyibiam](https.//github.com/ValentineNyibiam)
-- **Project Timeline:**
-  - **Released:** Mar. 4, 2024 - 6am.
-  - **1st Deadline:** Mar 11, 2024 - 6am.
-  - **Duration:** 7 days.
-  - **Month** 5, **Week** 3.
 
-## Technologies ##
-- All files written using using python3 (version 3.8.5)
-- File types can be identified by their extensions
-- Code tested on Ubuntu 20.04 LTS.
-
-
-## General Use ##
+## Overview of the Console ##
+### How to Use ###
 1. Clone repository to your local machine
 2. `cd` into repository.
 ```
@@ -57,8 +46,8 @@ There are a variety of commands available within the console program.
 
 <br />
 <br />
-## Examples ##
-### Primary Command Syntax ###
+### Examples ###
+#### Main Commands Syntax ####
 
 ###### Example 0: Create an object
 Usage: create <class_name>
@@ -96,8 +85,8 @@ Usage: update <class_name> <_id>
 'updated_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729907), 'first_name': 'person'}
 (hbnb)
 ```
-<h3>Alternative Syntax</h3>
 
+#### Alternative Commands Syntax ####
 ###### Example 0: Show all User objects
 Usage: <class_name>.all()
 ```
@@ -129,10 +118,66 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 (hbnb) User.all()
 (hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'name': 'Fred the Frog', 'age': 9, 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
 ```
-<br>
+<br/>
+
+## Folder Details ###
+- **Date Created:** Mar 4 2024.
+- **Authors:**
+	- [William Inyam](https.//github.com/thecypherzen)
+	- [Valentine Nyibiam](https.//github.com/ValentineNyibiam)
+- **Project Timeline:**
+  - **Released:** Mar. 4, 2024 - 6am.
+  - **1st Deadline:** Mar 11, 2024 - 6am.
+  - **Duration:** 7 days.
+  - **Month** 5, **Week** 3.
 
 
-## Files ###
+## File Tree ##
+AirBnB_clone<br/>
+├── AUTHORS</br/>
+├── README.md</br/>
+├── console.py</br/>
+├── genauthors.sh</br/>
+├── models</br/>
+│   ├── __init__.py</br/>
+│   ├── amenity.py</br/>
+│   ├── base_model.py</br/>
+│   ├── city.py</br/>
+│   ├── engine</br/>
+│   │   ├── .hbnb_storage.json</br/>
+│   │   ├── __init__.py</br/>
+│   │   │   ├── __init__.cpython-38.pyc</br/>
+│   │   │   └── file_storage.cpython-38.pyc</br/>
+│   │   └── file_storage.py</br/>
+│   ├── place.py</br/>
+│   ├── review.py</br/>
+│   ├── state.py</br/>
+│   └── user.py</br/>
+├── tests</br/>
+│   ├── __init__.py</br/>
+│   └── test_models</br/>
+│       ├── __init__.py</br/>
+│       ├── test_amenity.py</br/>
+│       ├── test_base_model.py</br/>
+│       ├── test_city.py</br/>
+│       ├── test_engine</br/>
+│       │   ├── __init__.py</br/>
+│       │   └── test_file_storage.py</br/>
+│       ├── test_place.py</br/>
+│       ├── test_review.py</br/>
+│       ├── test_state.py</br/>
+│       └── test_user.py</br/>
+└── web_static</br/>
+
+
+
+## Technologies ##
+- All files written using using python3 (version 3.8.5)
+- File types can be identified by their extensions
+- Code tested on Ubuntu 20.04 LTS.
+
+
+## Files###
 - *Here is a detailed list of all files in the repo and their description*.
 
 | SN | File            | Description                                        |
