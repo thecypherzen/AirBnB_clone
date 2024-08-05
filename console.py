@@ -148,42 +148,80 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
         return instance
 
+    def _pop_next_arg(self, args_list):
+        """Pops out the next arg from last args_list element"""
+        next_args = args_list[-1].split(",", maxsplit=1)
+        new_args = [arg for arg in args_list[:-1]]
+        next_args[0] = next_args[0].strip()
+        return new_args + next_args
+
     def default(self, line):
-        """Gets all instances of model by model_name"""
+        """Handles default commands
+
+        First checks if a valid method is called on a Class,
+          e.g. BaseModel.all()
+          - if so, it handles it or prints a default message
+        """
+        # check if line matches pattern: Class.method()
         regex = r'^[A-Za-z]+\.[a-z]+\(.*\)$'
         match = re.search(regex, line)
+        resolved = True
         if match:
-            regex = r'[\.\(\),\'"\s]'
-            input = [val for val in re.split(regex, line) if val]
+            # get Class and check if exists
+            input = line.split('.', maxsplit=1)
             if input[0] not in self.__classes:
                 print("** class doesn't exist **")
                 return
-            if input[1] == "all":
+            # get values from rest of cmd and handle
+            regex = '[)(]'
+            input = [input[0]] + [val for val in
+                                  re.split(regex, input[1]) if val]
+            i_len = len(input)
+            if input[1] == "all" and i_len == 2:
                 self.do_all(input[0])
-            elif input[1] == "count":
+            elif input[1] == "count" and i_len == 2:
                 print(len(storage.all(input[0]).values()))
-            else:
+            elif input[1] not in ["all", "count"]:
+                input = self._pop_next_arg(input)
                 i_len = len(input)
                 if i_len < 3:
                     print("** instance id missing **")
                     return
+                if input[1] not in ["show", "destroy", "update"]:
+                    print(f"*** Unknown syntax: {line}")
+                    return
                 instance = self._get_instance(input[2], input[0])
                 if instance:
-                    if input[1] == "show":
+                    if input[1] == "show" and i_len == 3:
                         print(instance)
-                    elif input[1] == "destroy":
+                    elif input[1] == "destroy" and i_len == 3:
                         storage.destroy(instance)
                         storage.save()
                     elif input[1] == "update":
-                        # print(input)
                         if i_len == 3:
                             print("** attribute name missing **")
-                        elif i_len == 4:
+                            return
+                        input = self._pop_next_arg(input)
+                        i_len = len(input)
+                        if i_len == 4:
                             print("** value missing **")
-                        else:
-                            print("ok")
-
-        else:
+                            return
+                        input[4] = input[4].strip()
+                        try:
+                            num = int(input[4])
+                            setattr(instance, input[3], num)
+                        except ValueError:
+                            try:
+                                num = float(input[4])
+                                setattr(instance, input[3], num)
+                            except ValueError:
+                                setattr(instance, input[3], input[4])
+                                instance.save()
+                    else:
+                        resolved = False
+            else:
+                resolved = False
+        if not resolved:
             print(f"*** Unknown syntax: {line}")
 
 
