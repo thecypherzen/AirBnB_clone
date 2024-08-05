@@ -55,18 +55,18 @@ There are a variety of commands available within the console program.
 | `update` | Updates existing attributes of an object based on its <class> and <uuid> | `update <class> <attr> <value>`<br/><ul><li>where `value` contains a space, it should be wrapped in quotes: `\' or \"` </li><li>prints nothing on success</li><li>prints error message if error occurs</li><li>can also be called on the <class> itself</li></ul> | `update User 61327bb5-1e2b-4b4e-9c47-ba6f0222bdb8 name Nameless`</br/>`User.update(61327bb5-1e2b-4b4e-9c47-ba6f0222bdb8, name Nameless)` |
 | `quit` | Exits the program<ul><li>`EOF` does the same</li></ul> | `quit` | `quit` |
 
-<br>
-<br>
+<br />
+<br />
 ## Examples ##
 ### Primary Command Syntax ###
 
 ###### Example 0: Create an object
 Usage: create <class_name>
 ```
-(hbnb) create BaseModel
+(hbnb) create State
 ```
 ```
-(hbnb) create BaseModel
+(hbnb) create State
 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 (hbnb)
 ```
@@ -74,25 +74,25 @@ Usage: create <class_name>
 Usage: show <class_name> <_id>
 
 ```
-(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-[BaseModel] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959), 
+(hbnb) show State 3aa5babc-efb6-4041-bfe9-3cc9727588f8
+[State] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959), 
 'updated_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96971)}
 (hbnb)
 ```
 ###### Example 2: Destroy an object
 Usage: destroy <class_name> <_id>
 ```
-(hbnb) destroy BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
+(hbnb) destroy State 3aa5babc-efb6-4041-bfe9-3cc9727588f8
+(hbnb) show State 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 ** no instance found **
 (hbnb)
 ```
 ###### Example 3: Update an object
 Usage: update <class_name> <_id>
 ```
-(hbnb) update BaseModel b405fc64-9724-498f-b405-e4071c3d857f first_name "person"
-(hbnb) show BaseModel b405fc64-9724-498f-b405-e4071c3d857f
-[BaseModel] (b405fc64-9724-498f-b405-e4071c3d857f) {'id': 'b405fc64-9724-498f-b405-e4071c3d857f', 'created_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729889), 
+(hbnb) update User b405fc64-9724-498f-b405-e4071c3d857f first_name "person"
+(hbnb) show User b405fc64-9724-498f-b405-e4071c3d857f
+[User] (b405fc64-9724-498f-b405-e4071c3d857f) {'id': 'b405fc64-9724-498f-b405-e4071c3d857f', 'created_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729889), 
 'updated_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729907), 'first_name': 'person'}
 (hbnb)
 ```
