@@ -46,39 +46,19 @@ $ cd /AirBnB_clone
 There are a variety of commands available within the console program.
 
 ### Commands ###
-    create - Creates an instance based on given class
-
-    * destroy - Destroys an object based on class and UUID
-
-    * show - Shows an object based on class and UUID
-
-    * all - Shows all objects the program has access to, or all objects of a given class
-
-    * update - Updates existing attributes an object based on class name and UUID
-
-    * quit - Exits the program (EOF will as well)
-
-
-##### Alternative Syntax
-Users are able to issue a number of console command using an alternative syntax:
-
-	Usage: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])
-Advanced syntax is implemented for the following commands: 
-
-    * all - Shows all objects the program has access to, or all objects of a given class
-
-	* count - Return number of object instances by class
-
-    * show - Shows an object based on class and UUID
-
-	* destroy - Destroys an object based on class and UUID
-
-    * update - Updates existing attributes an object based on class name and UUID
+| COMMAND | DESCRIPTON | USAGE  | EXAMPLE
+|---------|-------------|-------|----------|
+| `create` | Creates new instance of a given class<br/><ul><li>prints `id` fo class if operation was successful</li><li>prints an error message on error</li></ul> | `create <class_name>` | `create User` |
+| `destroy` | Destroys an object by its `class` and `uuid`<br/></ul><li>prints nothin on success.</li><li>prints error message on failure</li></ul> | `destroy <class> <uuid>` | `delete User 0963d9b6-981c-488d-9c96-3c0208e39715` |
+| `show`  | Shows an object based on class and UUID<br/><ul><li>prints string representation of <class> instance matching <uuid></li><li>prints error message if no match is found</li></ul> | `show <class> <uuid>` | `destroy User 0963d9b6-981c-488d-9c96-3c0208e39715` |
+| `all` | Shows all instances of:</br/><ul><li> all objects of <class> in storage<li><li>all instances of all objects in storage</li></ul> | `all [<class>]` |`all User`<br/>`all` |
+| `update` | Updates existing attributes of an object based on its <class> and <uuid> | `update <class> <attr> <value>`<br/><ul><li>where `value` contains a space, it should be wrapped in quotes: `\' or \"` </li><li>prints nothing on success</li><li>prints error message if error occurs</li><li>can also be called on the <class> itself</li></ul> | `update User 61327bb5-1e2b-4b4e-9c47-ba6f0222bdb8 name Nameless`</br/>`User.update(61327bb5-1e2b-4b4e-9c47-ba6f0222bdb8, name Nameless)` |
+| `quit` | Exits the program<ul><li>`EOF` does the same</li></ul> | `quit` | `quit` |
 
 <br>
 <br>
-<center> <h2>Examples</h2> </center>
-<h3>Primary Command Syntax</h3>
+## Examples ##
+### Primary Command Syntax ###
 
 ###### Example 0: Create an object
 Usage: create <class_name>
@@ -88,7 +68,7 @@ Usage: create <class_name>
 ```
 (hbnb) create BaseModel
 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-(hbnb)                   
+(hbnb)
 ```
 ###### Example 1: Show an object
 Usage: show <class_name> <_id>
