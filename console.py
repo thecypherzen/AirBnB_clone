@@ -138,6 +138,7 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def _get_instance(self, obj_id, obj_name=None):
+        print(obj_id, obj_name)
         instance = None
         all_objs = storage.all(obj_name).values()
         for obj in all_objs:
@@ -153,9 +154,8 @@ class HBNBCommand(cmd.Cmd):
         regex = r'^[A-Za-z]+\.[a-z]+\(.*\)$'
         match = re.search(regex, line)
         if match:
-            regex = r'[\.\(\)]'
+            regex = r'[\.\(\),\'"\s]'
             input = [val for val in re.split(regex, line) if val]
-            # print(input)
             if input[0] not in self.__classes:
                 print("** class doesn't exist **")
                 return
@@ -175,6 +175,14 @@ class HBNBCommand(cmd.Cmd):
                     elif input[1] == "destroy":
                         storage.destroy(instance)
                         storage.save()
+                    elif input[1] == "update":
+                        if i_len == 3:
+                            print("** attribute name missing **")
+                        elif i_len == 4:
+                            print("** value missing **")
+                        else:
+                            print("ok")
+
         else:
             print(f"*** Unknown syntax: {line}")
 
